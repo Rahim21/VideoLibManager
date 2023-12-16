@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Library Manager</title>
+</head>
+
+<body>
+    <h1>Welcome to the Video Library Manager!</h1>
+
+    <h2>Simple HTML Page</h2>
+    <p>This is a simple HTML page.</p>
+
+    <h2>Form Page</h2>
+    <form method="POST" action="{{ url_for('process_form') }}">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required>
+        <br>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+        <br>
+        <input type="submit" value="Submit">
+    </form>
+
+    <h2>Jinja Template Page</h2>
+    <p>{{ message }}</p>
+</body>
+
+</html>
