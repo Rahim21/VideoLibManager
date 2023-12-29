@@ -4,15 +4,17 @@ services:
   api:
     build:
       context: ./API
+    image: api
     ports:
       - "5001:5001"
     volumes:
-      - ./config.json:/app/config.json
+      - ./API/.:/app
 
   videolibmanager:
     build:
       context: ./VideoLibManager
+    image: videolibmanager
     ports:
       - "5002:5002"
     volumes:
-      - ./config.json:/app/config.json
+      - ./VideoLibManager:/app
