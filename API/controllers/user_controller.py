@@ -1,5 +1,5 @@
 # controllers/user_controller.py
-from flask import jsonify, request
+from flask import jsonify, request, make_response
 from services.user_service import UserService
 
 class UserController:
@@ -20,33 +20,27 @@ class UserController:
             return jsonify({"statusCode": 500, "error": "Erreur interne. Veuillez réessayer plus tard."})
 
     @staticmethod
-    def login():
+    def login_user():
         try:
-            # Récupère les données d'authentification depuis la requête
-            email = request.json.get('email')
-            password = request.json.get('password')
-
-            # Appelle le service d'authentification
-            token = UserService.login_user(email, password)
-
-            # Retourne la réponse appropriée
-            if token:
-                return jsonify({"statusCode": 200, "token": token})
+            data = request.get_json()
+            user = UserService.get_user_by_credentials(data['email'], data['password'])
+            if user:
+                # Création d'un jeton JWT
+                token = UserService.login_user(user['id'])
+                if token:
+                    return jsonify({"statusCode": 200, "token": token})
+                else:
+                    return jsonify({"statusCode": 500, "error": "Erreur interne lors de la création du jeton."})
             else:
                 return jsonify({"statusCode": 400, "error": "Identifiants incorrects."})
-
         except Exception as e:
             return jsonify({"statusCode": 500, "error": "Erreur interne. Veuillez réessayer plus tard."})
 
     @staticmethod
-    def logout():
+    def logout_user():
         try:
-            # Appelle le service de déconnexion
-            UserService.logout_user()
-
-            # Retourne la réponse appropriée
-            return jsonify({"statusCode": 200, "message": "Déconnexion réussie."})
-
+            response = UserService.logout_user(make_response())
+            return jsonify({"statusCode": 200, "message": "Déconnexion réussie.", "response":response})
         except Exception as e:
             return jsonify({"statusCode": 500, "error": "Erreur interne. Veuillez réessayer plus tard."})
         

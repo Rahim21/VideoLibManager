@@ -17,4 +17,4 @@ services:
     ports:
       - "5002:5002"
     volumes:
-      - ./VideoLibManager:/app
+      - ./VideoLibManager/.:/app
