@@ -1,3 +1,6 @@
+# -----------------------------------------------------------------------------
+# Auteurs: HAYAT Rahim et DRIOUCHE Sami
+# -----------------------------------------------------------------------------
 # controllers/user_controller.py
 from flask import jsonify, request, make_response
 from services.user_service import UserService
@@ -7,15 +10,11 @@ class UserController:
     @staticmethod
     def register_user(user_data):
         try:
-            # Appelle le service d'inscription
             user = UserService.create_user(user_data)
-
-            # Retourne la réponse appropriée
             if user:
                 return jsonify({"statusCode": 201, "user": user})
             else:
                 return jsonify({"statusCode": 400, "error": "L'utilisateur existe déjà."})
-
         except Exception as e:
             return jsonify({"statusCode": 500, "error": "Erreur interne. Veuillez réessayer plus tard."})
 

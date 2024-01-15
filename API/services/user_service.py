@@ -1,20 +1,39 @@
+# -----------------------------------------------------------------------------
+# Auteurs: HAYAT Rahim et DRIOUCHE Sami
+# -----------------------------------------------------------------------------
 # services/user_service.py
 import json
 import os
 from models.user_model import User
-from flask_jwt_extended import create_access_token
+from flask import jsonify, make_response
+from flask_jwt_extended import create_access_token, unset_jwt_cookies
+from werkzeug.security import generate_password_hash, check_password_hash
 
 class UserService:
 
     @staticmethod
     def create_user(user_data):
         users = UserService.get_users()
-        if any(user['email'] == user_data['email'] for user in users):
-            return None
+        print(f" len  {len(users)} ")
+        if users:
+            if any(user['email'] == user_data['email'] for user in users):
+                return None
+        user_data['password'] = generate_password_hash(user_data['password'], method='pbkdf2:sha256')
         new_user = User(id=len(users) + 1, **user_data)
         users.append(new_user.__dict__)
         UserService._save_users(users)
         return new_user.__dict__
+
+    @staticmethod
+    def get_user_by_credentials(email, password):
+        users = UserService.get_users()
+        for user in users:
+            try:
+                if user['email'] == email and check_password_hash(user['password'], password):
+                    return user
+            except Exception as e:
+                print(f"Error comparing passwords: {e}")
+        return None
 
     @staticmethod
     def login_user(user_id):
@@ -25,7 +44,10 @@ class UserService:
     @staticmethod
     def logout_user(response):
         try:
-            response.delete_cookie('access_token')
+            response = make_response(jsonify(msg="Déconnecté avec succès"), 200)
+            unset_jwt_cookies(response)
+            return response
+
         except Exception as e:
             raise Exception("Erreur lors de la déconnexion. Veuillez réessayer plus tard.")
 
@@ -33,9 +55,12 @@ class UserService:
     def get_users():
         file_path = "database/users.json"
         users = []
-        if os.path.exists(file_path):
+        if os.path.exists(file_path) and os.stat(file_path).st_size > 0:
             with open(file_path, "r") as file:
                 users = json.load(file)
+        else:
+            with open(file_path, "w") as file:
+                json.dump([], file)
         return users
 
     @staticmethod
@@ -67,8 +92,3 @@ class UserService:
         file_path = "database/users.json"
         with open(file_path, "w") as file:
             json.dump(users, file, indent=2)
-
-    @staticmethod
-    def get_user_by_credentials(email, password):
-        users = UserService.get_users()
-        return next((user for user in users if user['email'] == email and user['password'] == password), None)

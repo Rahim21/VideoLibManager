@@ -1,3 +1,6 @@
+# -----------------------------------------------------------------------------
+# Auteurs: HAYAT Rahim et DRIOUCHE Sami
+# -----------------------------------------------------------------------------
 # routes/user_route.py
 from flask import Blueprint, request, redirect, url_for
 from flask_jwt_extended import jwt_required, get_jwt_identity

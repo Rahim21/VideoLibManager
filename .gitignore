@@ -1,0 +1,5 @@
+# Ignorer les dossiers et fichiers pycache
+__pycache__/
+
+# Ignorer les fichiers .DS_Store
+.DS_Store

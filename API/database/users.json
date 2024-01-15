@@ -1,11 +1,11 @@
 [
   {
     "id": 1,
+    "email": "john.doe@example.com",
+    "password": "pbkdf2:sha256:600000$aGZ7LeK1KyGzhS1F$f9d068d156b36f80cb871394a76ebd96c1417f2c3d92c54e884b293017b93ce4",
     "nom": "Doe",
     "prenom": "John",
-    "pseudo": "john_doe",
-    "email": "john.doe@example.com",
-    "password": "password123",
+    "pseudo": "jojo123",
     "age": 25
   }
 ]
