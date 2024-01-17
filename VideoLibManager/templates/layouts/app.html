@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Digital Movies</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="{{url_for('static', filename = 'css/style.css')}}">
+    <link rel="shortcut icon" type="image/x-ico" href="{{url_for('static', filename = 'images/favicon.png')}}"/>
+</head>
+<body>
+    <header>
+        <!-- <video src="video/jurasic world.webm" autoplay muted></video> -->
+        <nav>
+            <!-- navbar -->
+            <div class="logo_ul">
+                <img src="{{url_for('static', filename = 'images/logo.png')}}" alt="">
+                <ul>
+                    <li>
+                        <a href="{{ url_for('index') }}">Home</a>
+                    </li>
+                    <li>
+                        <a href="#" id="series">Series</a>
+                    </li>
+                    <li>
+                        <a href="#" id="movies">Movies</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- barre de recherche -->
+            <div class="search_user">
+                {% block search_bar %}{% endblock %}
+
+                {% if cookie %}
+                    <!-- Utilisateur connecté -->
+                    <img src="{{url_for('static', filename = 'images/user.jpg')}}" alt="">
+                    <a href="/logout"><i class="bi bi-box-arrow-right"></i> </a>
+                {% else %}
+                    <!-- Utilisateur non connecté -->
+                    <a href="{{ url_for('register') }}">Inscription</a>
+                    <a href="{{ url_for('login') }}">Connexion</a>
+                {% endif %}
+
+                {% block search %}
+                <div class="search">
+                    <!-- <a href="#" class="card">
+                        <img src="img/the boys.jpg" alt="">
+                        <div class="cont"> 
+                            <h3>The Boys</h3>
+                            <p>Action , 2024, <span>IMDB</span><i class="bi bi-star-fill"></i> 9,6</p>
+                        </div>
+                    </a> -->
+                </div>
+                {% endblock %}
+            </div>
+        </nav>
+        {% block content %}{% endblock %}
+</header>
+<script src= "{{url_for('static', filename = 'js/app.js')}}"></script></head>
+</body>
+</html>

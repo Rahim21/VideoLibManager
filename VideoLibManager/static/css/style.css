@@ -1,0 +1,596 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100&display=swap');
+
+* {
+    padding: 0%;
+    margin: 0%;
+    box-sizing: border-box;
+}
+
+body {
+    width: 100%;
+    height: 100vh;
+    background: rgb(45, 45, 45);
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+header {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    /* border: 1px solid #fff; */
+    /* border-radius: 20px; */
+    overflow: hidden;
+    box-shadow: 0px 10px 25px -10px #000;
+}
+
+header::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: url('/static/images/Cover.svg') no-repeat center center/cover;
+    opacity: .9;
+    z-index: -1;
+}
+
+header::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, transparent, #000);
+    z-index: -1;
+}
+
+/* video de fond */
+header video {
+    position: absolute;
+    top: -47%;
+    /* left: 0; */
+    width: 120%;
+    height: 190%;
+    object-fit: cover;
+    z-index: -1;
+}
+
+
+/* navbar */
+nav {
+    width: 100%;
+    height: 10%;
+    /* border: 1px solid #fff; */
+    background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0));
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0px 50px;
+}
+
+
+nav .logo_ul {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+nav .logo_ul img {
+    width: 160px;
+    margin-top: 10px;
+
+}
+
+nav .search_user a {
+    padding: 8px 12px;
+    font-size: 15px;
+    font-weight: 600;
+    /* background: #7B6EF6; */
+    border-radius: 5px;
+    color: #fff;
+    margin-left: 10px;
+    text-decoration: none;
+    /* animation: button 3s linear infinite; */
+}
+
+nav .logo_ul ul {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    list-style: none;
+}
+
+nav .logo_ul ul li {
+    padding: 3px 15px;
+}
+
+nav .logo_ul ul a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 20px;
+    font-weight: bold;
+    transition: .3s linear;
+}
+
+nav .logo_ul ul a:hover {
+    color: rgb(255, 255, 255, .7);
+}
+
+/* barre de recherche */
+nav .search_user {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+nav .search_user input {
+    padding: 10px 95px;
+    border-radius: 20px;
+    border: none;
+    outline: none;
+    background: rgb(255, 255, 255, .3);
+    color: #fff;
+    margin-right: 30px;
+
+}
+
+nav .search_user input::placeholder {
+    color: #fff;
+}
+
+nav .search_user img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+nav .search_user .search {
+    position: absolute;
+    width: 350px;
+    height: 270px;
+    /* border: 1px solid #fff; */
+    right: 250px;
+    top: 54px;
+    z-index: 99999;
+    overflow-y: auto;
+}
+
+nav .search_user .search::-webkit-scrollbar {
+    width: 5px;
+    background: rgb(255, 255, 255, .3);
+    border-radius: 5px;
+    visibility: hidden;
+}
+
+nav .search_user .search::-webkit-scrollbar-thumb {
+    width: 50px;
+    background: rgb(255, 255, 255, .4);
+    border-radius: 5px;
+    visibility: hidden;
+}
+
+nav .search_user .search:hover::-webkit-scrollbar {
+
+    visibility: visible;
+}
+
+nav .search_user .search:hover::-webkit-scrollbar-thumb {
+
+    visibility: visible;
+}
+
+nav .search_user .search .card {
+    position: relative;
+    width: 100%;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+    padding: 3px 0px;
+    text-decoration: none;
+    display: none;
+
+}
+
+nav .search_user .search .card::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgb(255, 255, 255, .1);
+    backdrop-filter: blur(5px);
+    border-radius: 5px;
+    z-index: -1;
+}
+
+nav .search_user .search .card img {
+    width: 28px;
+    height: 90%;
+    border-radius: 2px;
+    margin-left: 8px;
+}
+
+nav .search_user .search .card .cont {
+    margin-left: 10px;
+    color: #fff;
+}
+
+nav .search_user .search .card .cont h3 {
+    font-size: 15px;
+    line-height: 25px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 250px;
+}
+
+nav .search_user .search .card .cont p {
+    font-size: 10px;
+    color: rgb(255, 255, 255, .8);
+}
+
+nav .search_user .search .card .cont span {
+    background: yellow;
+    color: #000;
+    padding: 0px 3px;
+    margin: 0px 5px 0px 10px;
+    font-weight: 500;
+}
+
+header .content {
+    position: relative;
+    color: #fff;
+    margin-top: 50px;
+    padding-left: 50px;
+}
+
+header .content h1 {
+    font-size: 50px;
+}
+
+header .content p {
+    font-size: 18px;
+    width: 350px;
+    word-break: break-all;
+}
+
+header .content .details {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+header .content .details h6 {
+    color: rgb(255, 255, 255, .8);
+    font-size: 12px;
+    margin-right: 10px;
+}
+
+header .content .details h5 {
+    color: rgb(142, 230, 48);
+    font-size: 12px;
+    margin-right: 10px;
+}
+
+header .content .details h4 {
+    color: #fff;
+    font-size: 12px;
+    margin-right: 10px;
+}
+
+
+header .content .details h3 {
+    color: #fff;
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+}
+
+header .content .details h3 span {
+    background: yellow;
+    color: #000;
+    padding: 0px 3px;
+    margin: 0px 5px 0px 5px;
+    font-weight: 500;
+}
+
+header .content .details h3 i {
+    margin-right: 5px;
+}
+
+header .content .btns {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+
+}
+
+header .content .btns a {
+    padding: 8px 12px;
+    font-size: 16px;
+    font-weight: 600;
+    background: #7B6EF6;
+    border-radius: 5px;
+    color: #fff;
+    margin-left: 10px;
+    text-decoration: none;
+    /* animation: button 3s linear infinite; */
+}
+
+
+header section {
+    top: 2vw;
+    position: relative;
+    width: 100%;
+    height: auto;
+    padding: 0px 50px;
+    bottom: 20px;
+    color: #fff;
+}
+
+/* liste des films */
+
+header section .cards {
+    position: relative;
+    width: 100%;
+    height: 200px;
+    /* border: 1px solid #fff; */
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+}
+
+header section .cards::-webkit-scrollbar {
+    display: none;
+
+}
+
+header section .cards .card {
+    position: relative;
+    min-width: 130px;
+    height: 180px;
+    /* border: 1px solid #fff; */
+    border-radius: 8px;
+    margin-right: 10px;
+    background: #000;
+    transition: .3s linear;
+}
+
+header section .cards .card .poster {
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+    position: relative;
+}
+
+header section .cards .card:hover {
+    min-width: 300px;
+    overflow: hidden;
+
+}
+
+header section .cards .card .rest_card {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+    left: 0;
+    top: 0;
+    z-index: 999999;
+    opacity: 0;
+    transition: 1s linear;
+}
+
+header section .cards .card .rest_card img {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+    z-index: -1;
+}
+
+header section .cards .card .rest_card::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, transparent, #000);
+    left: 0;
+    bottom: 0;
+    z-index: -1;
+}
+
+header section .cards .card .rest_card .cont {
+    position: absolute;
+    width: 100%;
+    bottom: 10px;
+    left: 0;
+    color: #fff;
+    padding: 0px 20px;
+}
+
+
+header section .cards .card .rest_card .cont .sub {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+header section .cards .card .rest_card .cont .sub p {
+    font-size: 12px;
+    font-weight: 400;
+    color: rgb(255, 255, 255, .7);
+}
+
+header section .cards .card .rest_card .cont .sub h3 {
+    font-size: 12px;
+    color: #ffff;
+    display: flex;
+    align-items: center;
+}
+
+header section .cards .card .rest_card .cont .sub h3 span {
+    background: yellow;
+    color: #000;
+    padding: 0px 3px;
+    margin: 0px 5px 0px 5px;
+    font-weight: 500;
+    border-radius: 2px;
+}
+
+header section .cards .card .rest_card .cont .sub h3 i {
+    margin-right: 3px;
+}
+
+header section .cards .card:hover .rest_card {
+    opacity: 1;
+}
+
+header section .bi-chevron-left,
+.bi-chevron-right {
+    position: absolute;
+    top: 50%;
+    left: 3%;
+    width: 25px;
+    height: 25px;
+    background: rgb(255, 255, 255, .3);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-size: 12px;
+    cursor: pointer;
+    transition: .3s linear;
+    z-index: 999999;
+    opacity: 0;
+}
+
+header section .bi-chevron-right {
+    left: unset;
+    right: 3%;
+}
+
+header section:hover .bi-chevron-right {
+    opacity: 1;
+}
+
+header section:hover .bi-chevron-left {
+    opacity: 1;
+}
+
+/* responsivité */
+@media screen and (max-width : 1250px) {
+    header video {
+        position: absolute;
+        width: 200%;
+        height: 180%;
+
+    }
+}
+
+@media screen and (max-width : 788px) {
+    header {
+        position: relative;
+        width: 100%;
+        height: 100%;
+    }
+
+    header nav {
+        padding: 0px 10px;
+        height: 15%;
+    }
+
+    header nav .logo_ul ul {
+        position: absolute;
+        top: 0px;
+        left: 41px;
+    }
+
+    header nav .logo_ul ul li {
+        padding: 3px 5px;
+    }
+
+    header nav .logo_ul ul li a {
+        font-size: 10px;
+    }
+
+    header .content {
+        padding-left: 10px;
+    }
+
+    header section {
+        padding: 0px 10px;
+
+    }
+}
+
+
+/* formulaire */
+header section #inscription-form {
+    /* position: absolute; */
+    width: 100%;
+    height: auto;
+    padding: 0px 50px;
+    bottom: 20px;
+    color: #fff;
+
+}
+
+#inscription-form {
+    max-width: 400px;
+    margin: 5% auto;
+    background-color: #121829;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+}
+
+#inscription-form h2 {
+    text-align: center;
+    color: #fff;
+    font-size: 40px;
+}
+
+#inscription-form form {
+    display: flex;
+    flex-direction: column;
+}
+
+#inscription-form label {
+    margin-bottom: 8px;
+    color: #fff;
+}
+
+#inscription-form input {
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #475069;
+    background-color: #0000003c;
+    opacity: 2;
+    border-radius: 4px;
+    color: #fff;
+    font-size: 16px;
+
+}
+
+#inscription-form button {
+    background-color: #7B6EF6;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+#inscription-form button:hover {
+    background-color: #9388f7;
+}

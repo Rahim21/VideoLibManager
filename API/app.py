@@ -19,6 +19,7 @@ jwt = JWTManager(app)
 CORS(app)
 
 app.register_blueprint(user_blueprint)
+# app.register_blueprint(movie_blueprint)
 
 @app.route('/')
 def hello_world():
