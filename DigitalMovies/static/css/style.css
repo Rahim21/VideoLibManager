@@ -9,40 +9,47 @@
 body {
     width: 100%;
     height: 100vh;
-    background: rgb(45, 45, 45);
+    /* background: rgb(45, 45, 45); */
+    background: url('/static/images/Cover.svg') no-repeat center center/cover;
+    background-attachment: fixed;
     font-family: 'Poppins', sans-serif;
     display: flex;
     align-items: center;
     justify-content: center;
+
 }
 
 header {
     position: relative;
     width: 100%;
     height: 100%;
-    /* border: 1px solid #fff; */
-    /* border-radius: 20px; */
-    overflow: hidden;
-    box-shadow: 0px 10px 25px -10px #000;
+    overflow-x: hidden;
+
+
 }
 
 header::before {
+
     content: '';
     position: absolute;
     width: 100%;
     height: 100%;
-    background: url('/static/images/Cover.svg') no-repeat center center/cover;
+    /* background: url('/static/images/Cover.svg') no-repeat center center/cover; */
+
     opacity: .9;
+
     z-index: -1;
 }
 
 header::after {
+
     content: '';
     position: absolute;
     width: 100%;
     height: 100%;
     background: linear-gradient(180deg, transparent, #000);
     z-index: -1;
+
 }
 
 /* video de fond */
@@ -59,6 +66,8 @@ header video {
 
 /* navbar */
 nav {
+
+    position: fixed;
     width: 100%;
     height: 10%;
     /* border: 1px solid #fff; */
@@ -67,6 +76,9 @@ nav {
     align-items: center;
     justify-content: space-between;
     padding: 0px 50px;
+    z-index: 999999;
+    backdrop-filter: blur(10px);
+
 }
 
 
@@ -241,56 +253,57 @@ nav .search_user .search .card .cont span {
     font-weight: 500;
 }
 
-header .content {
+/* contenu de la page */
+.content {
     position: relative;
     color: #fff;
     margin-top: 50px;
     padding-left: 50px;
 }
 
-header .content h1 {
+.content h1 {
     font-size: 50px;
 }
 
-header .content p {
+.content p {
     font-size: 18px;
     width: 350px;
     word-break: break-all;
 }
 
-header .content .details {
+.content .details {
     display: flex;
     align-items: center;
     margin-top: 10px;
 }
 
-header .content .details h6 {
+.content .details h6 {
     color: rgb(255, 255, 255, .8);
     font-size: 12px;
     margin-right: 10px;
 }
 
-header .content .details h5 {
+.content .details h5 {
     color: rgb(142, 230, 48);
     font-size: 12px;
     margin-right: 10px;
 }
 
-header .content .details h4 {
+.content .details h4 {
     color: #fff;
     font-size: 12px;
     margin-right: 10px;
 }
 
 
-header .content .details h3 {
+.content .details h3 {
     color: #fff;
     display: flex;
     align-items: center;
     font-size: 12px;
 }
 
-header .content .details h3 span {
+.content .details h3 span {
     background: yellow;
     color: #000;
     padding: 0px 3px;
@@ -298,18 +311,18 @@ header .content .details h3 span {
     font-weight: 500;
 }
 
-header .content .details h3 i {
+.content .details h3 i {
     margin-right: 5px;
 }
 
-header .content .btns {
+.content .btns {
     margin-top: 20px;
     display: flex;
     align-items: center;
 
 }
 
-header .content .btns a {
+.content .btns a {
     padding: 8px 12px;
     font-size: 16px;
     font-weight: 600;
@@ -318,7 +331,6 @@ header .content .btns a {
     color: #fff;
     margin-left: 10px;
     text-decoration: none;
-    /* animation: button 3s linear infinite; */
 }
 
 
@@ -338,7 +350,6 @@ header section .cards {
     position: relative;
     width: 100%;
     height: 200px;
-    /* border: 1px solid #fff; */
     margin-top: 10px;
     display: flex;
     align-items: center;
@@ -416,26 +427,26 @@ header section .cards .card .rest_card .cont {
 }
 
 
-header section .cards .card .rest_card .cont .sub {
+.sub {
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
-header section .cards .card .rest_card .cont .sub p {
+.sub p {
     font-size: 12px;
     font-weight: 400;
     color: rgb(255, 255, 255, .7);
 }
 
-header section .cards .card .rest_card .cont .sub h3 {
+.sub h3 {
     font-size: 12px;
-    color: #ffff;
+    color: #20df06;
     display: flex;
     align-items: center;
 }
 
-header section .cards .card .rest_card .cont .sub h3 span {
+.sub h3 span {
     background: yellow;
     color: #000;
     padding: 0px 3px;
@@ -444,7 +455,7 @@ header section .cards .card .rest_card .cont .sub h3 span {
     border-radius: 2px;
 }
 
-header section .cards .card .rest_card .cont .sub h3 i {
+.sub h3 i {
     margin-right: 3px;
 }
 
@@ -593,4 +604,91 @@ header section #inscription-form {
 
 #inscription-form button:hover {
     background-color: #9388f7;
+}
+
+/* page pour ajouter les films */
+#element_movie {
+    display: flex;
+    /* Utiliser un conteneur flex pour aligner les divs enfants */
+    /* overflow: auto; */
+    align-items: center;
+    background-color: #475069;
+    background-blend-mode: multiply;
+    padding: 20px;
+    /* Centrer les divs verticalement  */
+}
+
+#element_movie div {
+    flex: 1;
+    /* Chaque div enfant prendra une part égale de l'espace disponible */
+    margin: 0 10px;
+    /* Ajuster l'espacement horizontal entre les divs */
+    /* met l'image au milieu de la div */
+    display: flex;
+    overflow: auto
+}
+
+#element_movie img {
+
+    height: 500px;
+    margin-left: 20%;
+    max-width: 100%;
+    /* Assurez-vous que l'image ne dépasse pas la largeur de sa div parente */
+}
+
+#titre_movie {
+    color: #fff;
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: 10px;
+
+    text-align: center;
+}
+
+.grille {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 300px);
+    grid-gap: 5px;
+    margin: 3% auto;
+    /* max-width: 1000px; */
+    /* width: 50%; */
+    height: auto;
+    justify-content: center;
+}
+
+.grid-item {
+    background-color: rgba(255, 255, 255, 0.104);
+
+    border-radius: 15px;
+    padding: 15px;
+    margin: 5px;
+}
+
+/* aggrandi l'item au survole */
+.grid-item:hover {
+    transform: scale(1.06);
+    transition: .3s linear;
+}
+
+.grille img {
+    width: 100%;
+    height: 80%;
+    object-fit: cover;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: .3s linear;
+}
+
+.block {
+    padding: 10px;
+    padding-top: 5%;
+}
+
+#titre_film {
+    color: #fff;
+    font-size: 25px;
+    font-weight: bold;
+    margin-bottom: 10px;
+
+    /* text-align: center; */
 }

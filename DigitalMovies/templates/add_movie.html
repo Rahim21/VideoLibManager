@@ -1,0 +1,50 @@
+{% extends 'layouts/app.html' %}
+
+{% block content %}
+<h1 id="titre_movie">Ajoute des films à volonté</h1>
+
+<div id="element_movie">
+    <div>
+        <img src="{{url_for('static', filename = 'images/add_movie.svg')}}" alt="">
+    </div>
+    <div >
+        <section id="inscription-form">
+
+            <h2>Ajouter un film</h2>
+        
+            <form action="/form_add_movie" method="POST">
+        
+                <label for="title">Titre :</label>
+        
+                <input type="text" id="title" name="title"  placeholder="Titre">
+
+                <label for="overview">overview :</label>
+        
+                <input type="text" id="overview" name="overview" required placeholder="overview">
+
+                <label for="release_date">release_date :</label>
+        
+                <input type="text" id="release_date" name="release_date" required placeholder="release_date">
+
+                <label for="genre">Genre :</label>
+        
+                <input type="text" id="genre" name="genre" required placeholder="Genre">
+                
+                <label for="poster_path">poster_path :</label>
+        
+                <input type="text" id="poster_path" name="poster_path" required placeholder="poster_path">
+
+                <label for="production_companies">production_companies :</label>
+        
+                <input type="text" id="production_companies" name="production_companies" required placeholder="production_companies">
+                
+                <label for="production_countries">production_countries :</label>
+        
+                <input type="text" id="production_countries" name="production_countries" required placeholder="production_countries">
+
+                <button type="submit">Ajouter</button>
+            </form>
+        </section>
+    </div>
+</div>
+{% endblock %}

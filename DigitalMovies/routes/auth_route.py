@@ -1,13 +1,13 @@
-from flask import Flask, render_template, request , make_response
+# -----------------------------------------------------------------------------
+# Auteurs: HAYAT Rahim et DRIOUCHE Sami
+# -----------------------------------------------------------------------------
+# routes/auth_route.py
+from flask import Blueprint, request, render_template, make_response
 import requests
 
-app = Flask(__name__)
+auth_blueprint = Blueprint('auth', __name__)
 
-@app.route('/register', methods=['GET'])
-def register():
-    return render_template('register.html')
-
-@app.route('/form_register', methods=['POST'])
+@auth_blueprint.route('/form_register', methods=['POST'])
 def form_register():
     username, email, password = (request.form[field] for field in ['username', 'email', 'password'])
     
@@ -26,13 +26,9 @@ def form_register():
     else:
         return render_template('index.html', message='Registration failed!')
 
-@app.route('/login')
-def login():
-    return render_template('login.html')
 
-@app.route('/form_login', methods=['POST'])
+@auth_blueprint.route('/form_login', methods=['POST'])
 def form_login():
-    
     email, password = (request.form[field] for field in [ 'email', 'password'])
     url = "http://127.0.0.1:5001/users/login"
     data = {
@@ -54,7 +50,8 @@ def form_login():
     else:
         return render_template('index.html', message='Login failed!')
 
-@app.route('/logout')
+
+@auth_blueprint.route('/logout', methods=['GET']) # GET ou POST ?
 def logout():
     # Suppression du cookie contenant le token
     response = make_response("Cookie Removed")
@@ -63,11 +60,3 @@ def logout():
     response.headers['Location'] = '/'
     response.status_code = 302
     return response
-
-@app.route('/')
-def index():
-    token = request.cookies.get('token')
-    return render_template('index.html', cookie=token)
-
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5002, debug=True)

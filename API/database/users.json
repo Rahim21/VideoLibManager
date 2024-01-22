@@ -7,5 +7,14 @@
     "prenom": "John",
     "pseudo": "jojo123",
     "age": 25
+  },
+  {
+    "id": 2,
+    "email": "test@gmail.com",
+    "password": "pbkdf2:sha256:600000$mfgI2hguuzKOpwKc$2672bcf3c06b8f04e7bcce43654876bbefd1a69a7e02a96b79c6b597713a6923",
+    "nom": null,
+    "prenom": null,
+    "pseudo": "test",
+    "age": null
   }
 ]

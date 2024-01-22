@@ -6,6 +6,7 @@ import os
 from flask import Flask
 from flask_jwt_extended import JWTManager
 from flask_cors import CORS
+
 from routes.user_route import user_blueprint
 from routes.movie_route import movie_blueprint
 

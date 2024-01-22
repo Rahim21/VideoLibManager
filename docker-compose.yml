@@ -10,11 +10,11 @@ services:
     volumes:
       - ./API/.:/app
 
-  videolibmanager:
+  digitalmovies:
     build:
-      context: ./VideoLibManager
-    image: videolibmanager
+      context: ./DigitalMovies
+    image: digitalmovies
     ports:
       - "5002:5002"
     volumes:
-      - ./VideoLibManager/.:/app
+      - ./DigitalMovies/.:/app
