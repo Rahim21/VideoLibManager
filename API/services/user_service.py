@@ -4,6 +4,7 @@
 # services/user_service.py
 import json
 import os
+import uuid
 from models.user_model import User
 from flask import jsonify, make_response
 from flask_jwt_extended import create_access_token, unset_jwt_cookies
@@ -14,12 +15,11 @@ class UserService:
     @staticmethod
     def create_user(user_data):
         users = UserService.get_users()
-        print(f" len  {len(users)} ")
         if users:
             if any(user['email'] == user_data['email'] for user in users):
                 return None
         user_data['password'] = generate_password_hash(user_data['password'], method='pbkdf2:sha256')
-        new_user = User(id=len(users) + 1, **user_data)
+        new_user = User(id=str(uuid.uuid4()), **user_data)
         users.append(new_user.__dict__)
         UserService._save_users(users)
         return new_user.__dict__
@@ -83,7 +83,8 @@ class UserService:
         users = UserService.get_users()
         user = next((u for u in users if u['id'] == user_id), None)
         if user:
-            users.remove(user)
+            # users.remove(user)
+            user['is_active'] = False
             UserService._save_users(users)
         return user
 

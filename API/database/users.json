@@ -9,12 +9,63 @@
     "age": 25
   },
   {
-    "id": 2,
-    "email": "test@gmail.com",
-    "password": "pbkdf2:sha256:600000$mfgI2hguuzKOpwKc$2672bcf3c06b8f04e7bcce43654876bbefd1a69a7e02a96b79c6b597713a6923",
+    "id": "0070a122-e2a6-45b0-b2db-fa7d123ea6e5",
+    "email": "email@email.com",
+    "password": "pbkdf2:sha256:600000$PMMmuMiDgfqWN38f$84cb9dbfdc6f8c0742d4c8012d75966267dcc476efa2ebc004dfb82a33acedcb",
     "nom": null,
     "prenom": null,
-    "pseudo": "test",
-    "age": null
+    "pseudo": "a",
+    "age": null,
+    "is_active": true
+  },
+  {
+    "id": "4825baeb-7ae3-4053-bd80-84e1ebfbeab7",
+    "email": "digita@digital.com",
+    "password": "pbkdf2:sha256:600000$VjGzHIJumHiVY3B5$be088c35181e26e7a2ab4fe7210cd22a35008a103f548a75f8944ffc9feb487c",
+    "nom": null,
+    "prenom": null,
+    "pseudo": "digita",
+    "age": null,
+    "is_active": true
+  },
+  {
+    "id": "5470c806-8aaa-402b-a866-4229fe23a740",
+    "email": "user@email.com",
+    "password": "pbkdf2:sha256:600000$vZFSKI7ZAWaxWpSd$47234e92c87597f7dc9d15b730e38fdcc02cdc8bbab3aadf19c73bc71ad0440c",
+    "nom": null,
+    "prenom": null,
+    "pseudo": "user",
+    "age": null,
+    "is_active": true
+  },
+  {
+    "id": "8bedb666-4220-4f5f-8d39-2bc6afdcde84",
+    "email": "admin@admin.co",
+    "password": "pbkdf2:sha256:600000$4FgcChUQJcAQG0vm$b55d99dc326253ca06d4fbfe0a08818e16e5e640aa2918fd2c387f0e2a7e882f",
+    "nom": null,
+    "prenom": null,
+    "pseudo": "admin",
+    "age": null,
+    "is_active": true
+  },
+  {
+    "id": "2b24afac-2bd4-4cf5-a4fb-6fcdba6add88",
+    "email": "nouveau@email.com",
+    "password": "pbkdf2:sha256:600000$aEYtx1ZmcY0OYwro$11f6915658f81264f974aba53a2a3cf2dfaf7519417e95c45c2d916f05dcec0d",
+    "nom": null,
+    "prenom": null,
+    "pseudo": "nouveau",
+    "age": null,
+    "is_active": true
+  },
+  {
+    "id": "60cb6813-e498-4bce-a020-f219008d3532",
+    "email": "salut@yopmail.com",
+    "password": "pbkdf2:sha256:600000$kGeADEayt0NS4aOD$3cdca7db06243ea5a645260daa48b5ef1945f0d710485eadd9b3cb9b0382c15e",
+    "nom": null,
+    "prenom": null,
+    "pseudo": "salut",
+    "age": null,
+    "is_active": true
   }
 ]

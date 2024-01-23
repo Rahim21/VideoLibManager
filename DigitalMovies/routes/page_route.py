@@ -56,8 +56,6 @@ def index():
     else:
         print("Erreur lors de la requête")
         return None
-    
-    
 
 # ----- Authentification -----
 
@@ -69,7 +67,6 @@ def register():
 @page_blueprint.route('/login', methods=['GET'])
 def login():
     return render_template('login.html')
-
 
 # ----- Movie -----
 
@@ -86,3 +83,7 @@ def add_movie():
 def show_profile():
     token = g.token
     return render_template('profile.html', cookie=token)
+
+    # user_id = ...  # Obtenez l'ID de l'utilisateur actuel (inclus dans le token jwt)
+    # user = UserController.get_user(user_id, 'get', 'GET')
+    # return render_template('profile.html', user=user)

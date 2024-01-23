@@ -19,8 +19,8 @@ app.config['JWT_ACCESS_TOKEN_EXPIRES'] = 86400  # expire après 24 heures
 jwt = JWTManager(app)
 CORS(app)
 
-app.register_blueprint(user_blueprint)
-# app.register_blueprint(movie_blueprint)
+app.register_blueprint(user_blueprint, url_prefix='/users')
+app.register_blueprint(movie_blueprint, url_prefix='/movies')
 
 @app.route('/')
 def hello_world():
