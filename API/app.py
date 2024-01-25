@@ -11,7 +11,7 @@ from routes.user_route import user_blueprint
 from routes.movie_route import movie_blueprint
 
 app = Flask(__name__)
-app.secret_key = 'ProjetFlask'
+app.secret_key = 'ProjetFlaskAPI'
 
 # Configurer paramètres de JWT
 app.config['JWT_SECRET_KEY'] = os.environ.get('JWT_SECRET_KEY', 'VideoLibManager')

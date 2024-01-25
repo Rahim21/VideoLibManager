@@ -2,9 +2,11 @@
 # Auteurs: HAYAT Rahim et DRIOUCHE Sami
 # -----------------------------------------------------------------------------
 # routes/page_route.py
-from flask import Blueprint, request, render_template, make_response, g , jsonify
+from flask import Blueprint, request, render_template, make_response, g , jsonify, url_for
 import requests
+import jwt
 from .rule_route import require_token
+from controllers.user_controller import UserController
 
 page_blueprint = Blueprint('page', __name__)
 
@@ -13,45 +15,13 @@ page_blueprint = Blueprint('page', __name__)
 @page_blueprint.route('/', methods=['GET'])
 @require_token
 def index():
-    token = g.token
-
-    # url = "https://api.themoviedb.org/3/person/popular?language=fr-FR&page=1"
-    # headers = {
-    # "accept": "application/json",
-    # "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0MmI2M2ZmMDI1YTllN2JiNGRlODU0ZTZhNjViOWJlOSIsInN1YiI6IjY1YTdmYWQyMTEzODZjMDEyMmU2MjllYyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.Hl7k89A1p-8TVcOIhga1RLpxaFPdqTu7_HgZNkhnW5o"
-    # }
-    # response = requests.get(url, headers=headers)
-
-
-    # id_films = response.json()["results"]
-    # params = { 'api_key': '42b63ff025a9e7bb4de854e6a65b9be9' , 'language': 'fr-FR' , 'page': 1 , 'sort_by': 'popularity.desc' , 'include_adult': 'false' , 'include_video': 'false' }
-    # for i in range(1, 4):
-    #     params["page"] = i
-    #     response = requests.get(url, params=params)
-
-    #     # If the request was successful, append the films to the list
-    #     if response.status_code == 200:
-    #         id_films += response.json()["results"]
-            
-    # films = []
-    # for ids in id_films:
-    #     url = "https://api.themoviedb.org/3/movie/" + str(ids['id'])
-    #     params = { 'api_key': '42b63ff025a9e7bb4de854e6a65b9be9' , 'language': 'fr-FR' }
-    #     response = requests.get(url, headers=headers, params=params)
-    #     if response.status_code == 200:
-    #         films += [response.json()]
-    # films = jsonify(films)
-
-    # print(f"Résultat en json : { films.json() }")
-    
-   
+    token = g.token  
     url = "https://api.themoviedb.org/3/discover/movie?api_key=8770fea03d8b0d550c4b50be1656d5cb&sort_by=popularity.desc"
 
     reponse = requests.get(url)
     if reponse.status_code == 200:
         data = reponse.json()
         film_populaire = data.get('results', [])
-        # image = "https://image.tmdb.org/t/p/w342/" + film['poster_path']
         return render_template('index.html', cookie=token, movies=film_populaire)
     else:
         print("Erreur lors de la requête")
@@ -76,14 +46,40 @@ def add_movie():
     token = g.token
     return render_template('add_movie.html', cookie=token)
 
+
+
+
+@page_blueprint.route('/movie_detail/<int:movie_id>', methods=['GET'])
+@require_token
+def search_id(movie_id):
+    url = "https://api.themoviedb.org/3/movie/"+str(movie_id)+"?api_key=8770fea03d8b0d550c4b50be1656d5cb&language=en-US"
+    reponse = requests.get(url)
+    if reponse.status_code == 200:
+
+        data = reponse.json()
+        
+
+        url_video = "https://api.themoviedb.org/3/movie/"+str(movie_id)+"/videos?api_key=8770fea03d8b0d550c4b50be1656d5cb&language=en-US"
+        reponse_video = requests.get(url_video)
+        data_video = reponse_video.json()
+        ma_video = data_video.get('results', [])
+        ma_video = ma_video[0].get('key', [])
+       
+        token = g.token
+        return render_template('movie_detail.html', cookie=token, movie=data , data_video=ma_video)
+    else:
+        print("Erreur lors de la requête")
+        return None
+
 # ----- User -----
 
 @page_blueprint.route('/profile', methods=['GET'])
 @require_token
 def show_profile():
     token = g.token
-    return render_template('profile.html', cookie=token)
-
-    # user_id = ...  # Obtenez l'ID de l'utilisateur actuel (inclus dans le token jwt)
-    # user = UserController.get_user(user_id, 'get', 'GET')
-    # return render_template('profile.html', user=user)
+    decoded_token = jwt.decode(token, options={'verify_signature': False})
+    user_id = decoded_token.get('sub')
+    print(f"There is my user id : {user_id}")
+    user_data = UserController.get_user(user_id, f'/{str(user_id)}', 'GET')
+    print(f"There is my user data : {(user_data)}")
+    return render_template('profile.html', cookie=token, data=user_data)

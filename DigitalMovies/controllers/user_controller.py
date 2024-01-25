@@ -11,17 +11,26 @@ class UserController:
     api_url = "http://127.0.0.1:5001"
     user_url = api_url + "/users"
 
-    def request_to_api(method, url, data=None, success_message='Received!', error_message='Failed!', success_page='index.html', failure_page='index.html'):
+    def request_to_api(method, url, data=None, success_message='Received!', error_message='Failed!'):
         headers = {'Content-Type': 'application/json'}
         token = request.cookies.get('token')
         if token:
+            print("There is token !!!")
             headers.update({'Authorization': f'Bearer {token}'})
+        print("Print after token")
         response = requests.request(method, url, json=data, headers=headers)
         if response.json().get('statusCode', '') in [200, 201]:
-            return render_template(success_page, type_msg='success', message=success_message)
+            return jsonify({
+                'data': response.json(),
+                'type_msg': 'success',
+                'message': success_message
+            })
         else:
-            # ou page actuel
-            return render_template(failure_page, type_msg='error', message=error_message)
+            return jsonify({
+                'data': data,
+                'type_msg': 'error',
+                'message': error_message
+            })
 
     @staticmethod
     def register_user(user_data, route_url, method): # ajouter champs src et dest pour savoir de quel template il vient et où il se dirige ? en cas d'erreur ou success pour le rediriger
@@ -47,21 +56,7 @@ class UserController:
                 "password": password,
             }.items() if value
         }
-        response = requests.request(method, url, json=data)
-        if response.json().get('statusCode', '') in [200, 201]:
-            token = response.json().get('token', '')
-            resp = make_response(f"Cookie added !")
-            resp.set_cookie('token', token) # , httponly=False, secure=True
-            resp.headers['Location'] = '/'
-            resp.status_code = 302
-            response_data = {
-                'type_msg': 'success',
-                'message': f"{email} logged in successfully!",
-            }
-            resp.response = jsonify(response_data)
-            return resp
-        else:
-            return render_template("index.html", type_msg='error', message='Login failed!')
+        return UserController.request_to_api(method, str(url), data, f'{email} logged in successfully!', 'Login failed!')
 
     @staticmethod
     def logout_user(route_url, method):
@@ -83,9 +78,8 @@ class UserController:
 
     @staticmethod
     def get_user(user_id, route_url, method):
-        url = "{}/{}/{}".format(UserController.user_url, user_id, route_url.rsplit('.', 1)[-1])
+        url = "{}/{}".format(UserController.user_url, user_id)
         return UserController.request_to_api(method, url, success_message=f'User {user_id} fetched successfully!', error_message=f'Failed to fetch user {user_id}!')
-        # CORRECTION : RETOURNER LA DONNEE ET NON PAS LA PAGE ! PAGE_ROUTE SERT DEJA À ÇA !
 
     @staticmethod 
     def edit_user(user_id, user_data, route_url, method):
@@ -104,7 +98,7 @@ class UserController:
                 "is_active": is_active
             }.items() if value
         }
-        url = "{}/{}/{}".format(UserController.user_url, user_id, route_url.rsplit('.', 1)[-1])
+        url = "{}/{}".format(UserController.user_url, route_url.rsplit('.', 1)[-1])
         return UserController.request_to_api(method, url, data, f'User {user_id} updated successfully!', f'Failed to update user {user_id}!')
 
     @staticmethod

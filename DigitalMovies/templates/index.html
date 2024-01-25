@@ -6,7 +6,7 @@
 
 {% block content %}
 
-        <div class="content">
+        <!-- <div class="content">
             <h1 id="title">Money Heist</h1>
             <p> tandis qu'un génie du crime manipule la police pour mettre son plan à exécution.</p>
             <div class="details">
@@ -19,7 +19,7 @@
                 <a href="#" id="play">Watch <i class="bi bi-play-fill"></i></a>
                 <a href="#" id="download_main">Download <i class="bi bi-cloud-arrow-down-fill"></i></a>
             </div>
-        </div>
+        </div> -->
 
         <p>{{ message }}</p>
         
@@ -30,19 +30,17 @@
             <i class="bi bi-chevron-right"></i> -->
            
                <div class="grille">
-                <!-- fait une boucle for de 1 a 5 -->
                 {% for movie in movies %}
 
                 <div class="grid-item">
-                    <a href="#">
+                    <a href="{{ url_for('page.search_id', movie_id=movie.id) }}">
                         <img src="https://image.tmdb.org/t/p/w342/{{ movie.poster_path }}" alt="{{ movie.title }} ">
                         <div class="cont"> 
                             <h4 id="titre_film">
                                 {{ movie.title }}
                             </h4>
                             <div class="sub">
-                            <h3>Money Heist</h3>
-                            <p>Action , {{ movie.release_date }}, <span>IMDB  </span><i class="bi bi-star-fill"></i> {{ movie.vote_average }}</p></div>
+                            <p>{{ movie.release_date }}, <span>IMDB  </span><i class="bi bi-star-fill"></i> {{ movie.vote_average }}</p></div>
                         </div>
                     </a>
                 </div>

@@ -1,0 +1,4 @@
+{'data': {'statusCode': 200, 'user': {'age': None, 'email': 'test@gmail.com', 'id': '682e4b2d-4f21-4377-be8e-ea58cc9b9c85', 'is_active': True, 'nom': None, 'password': 'pbkdf2:sha256: 600000$UvGR1Rqo0ZybSKjf$7c50e0c2426a4d253f957d5489d94f67a9db92787f3f300e3052476bdf3cfc53', 'prenom': None, 'pseudo': 'drio0004'
+        }
+    }, 'message': 'User 682e4b2d-4f21-4377-be8e-ea58cc9b9c85 fetched successfully!', 'type_msg': 'success'
+}

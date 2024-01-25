@@ -7,6 +7,7 @@ from routes.user_route import user_blueprint
 # from routes.movie_route import movie_blueprint
 
 app = Flask(__name__)
+app.secret_key = 'ProjetFlaskDigitalMovies'
 
 app.register_blueprint(rule_blueprint)  # règle de l'app
 app.register_blueprint(page_blueprint) # page web
