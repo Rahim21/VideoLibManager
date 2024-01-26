@@ -13,7 +13,7 @@ class MovieController:
             movies = MovieService.get_movies()
             return jsonify({"statusCode": 200, "movies": movies})
         except Exception as e:
-            return jsonify({"statusCode": 500, "error": "Erreur interne. Veuillez réessayer plus tard."})
+            return jsonify({"statusCode": 500, "error": f"Erreur interne. {str(e)}"})
 
     @staticmethod
     def get_movie(movie_id):
@@ -23,7 +23,7 @@ class MovieController:
                 return jsonify({"statusCode": 200, "movie": None})
             return jsonify({"statusCode": 200, "movie": movie})
         except Exception as e:
-            return jsonify({"statusCode": 500, "error": "Erreur interne. Veuillez réessayer plus tard."})
+            return jsonify({"statusCode": 500, "error": f"Erreur interne. {str(e)}"})
 
     @staticmethod
     def add_movie(movie_data):
@@ -34,7 +34,7 @@ class MovieController:
             else:
                 return jsonify({"statusCode": 400, "error": "Erreur lors de l'ajout du film."})
         except Exception as e:
-            return jsonify({"statusCode": 500, "error": "Erreur interne. Veuillez réessayer plus tard."})
+            return jsonify({"statusCode": 500, "error": f"Erreur interne. {str(e)}"})
 
     @staticmethod
     def edit_movie(movie_id, updated_data):
@@ -44,7 +44,7 @@ class MovieController:
                 return jsonify({"statusCode": 200, "movie": None})
             return jsonify({"statusCode": 200, "movie": movie})
         except Exception as e:
-            return jsonify({"statusCode": 500, "error": "Erreur interne. Veuillez réessayer plus tard."})
+            return jsonify({"statusCode": 500, "error": f"Erreur interne. {str(e)}"})
 
     @staticmethod
     def delete_movie(movie_id):
@@ -54,52 +54,58 @@ class MovieController:
                 return jsonify({"statusCode": 200, "movie": None})
             return jsonify({"statusCode": 200, "movie": movie})
         except Exception as e:
-            return jsonify({"statusCode": 500, "error": "Erreur interne. Veuillez réessayer plus tard."})
+            return jsonify({"statusCode": 500, "error": f"Erreur interne. {str(e)}"})
 
     @staticmethod
-    def search_movie(query):
+    def search_movie(query, fields):
         try:
-            results = MovieService.search_movie(query)
-            return jsonify({"statusCode": 200, "results": results})
+            movies = MovieService.search_movie(query, fields)
+            return jsonify({"statusCode": 200, "movies": movies})
         except Exception as e:
-            return jsonify({"statusCode": 500, "error": "Erreur interne. Veuillez réessayer plus tard."})
+            return jsonify({"statusCode": 500, "error": f"Erreur interne. {str(e)}"})
 
     @staticmethod
-    def add_comment(movie_id, comment_data):
+    def add_comment(movie_id, user_id, comment_data):
         try:
-            comment = MovieService.add_comment(movie_id, comment_data)
-            return jsonify({"statusCode": 200, "comment": comment})
+            movie = MovieService.add_comment(movie_id, user_id, comment_data)
+            if movie:
+                return jsonify({"statusCode": 200, "movie": movie})
+            else:
+                return jsonify({"statusCode": 400, "error": "Erreur lors de l'ajout du commentaire."})
         except Exception as e:
-            return jsonify({"statusCode": 500, "error": "Erreur interne. Veuillez réessayer plus tard."})
+            return jsonify({"statusCode": 500, "error": f"Erreur interne. {str(e)}"})
 
     @staticmethod
-    def add_rating(movie_id, rating_data):
+    def add_rating(movie_id, user_id, rating_data):
         try:
-            rating = MovieService.add_rating(movie_id, rating_data)
-            return jsonify({"statusCode": 200, "rating": rating})
+            movie = MovieService.add_rating(movie_id, user_id, rating_data)
+            if movie:
+                return jsonify({"statusCode": 200, "movie": movie})
+            else:
+                return jsonify({"statusCode": 400, "error": "Erreur lors de l'ajout de la note."})
         except Exception as e:
-            return jsonify({"statusCode": 500, "error": "Erreur interne. Veuillez réessayer plus tard."})
-
-    @staticmethod
-    def get_videos(movie_id):
-        try:
-            videos = MovieService.get_videos(movie_id)
-            return jsonify({"statusCode": 200, "videos": videos})
-        except Exception as e:
-            return jsonify({"statusCode": 500, "error": "Erreur interne. Veuillez réessayer plus tard."})
-
+            return jsonify({"statusCode": 500, "error": f"Erreur interne. {str(e)}"})
+        
     @staticmethod
     def get_images(movie_id):
         try:
-            images = MovieService.get_images(movie_id)
-            return jsonify({"statusCode": 200, "images": images})
+            image = MovieService.get_images(movie_id)
+            return jsonify({"statusCode": 200, "image": image})
         except Exception as e:
-            return jsonify({"statusCode": 500, "error": "Erreur interne. Veuillez réessayer plus tard."})
+            return jsonify({"statusCode": 500, "error": f"Erreur interne. {str(e)}"})
 
-    @staticmethod
-    def get_watch_providers(movie_id):
-        try:
-            providers = MovieService.get_watch_providers(movie_id)
-            return jsonify({"statusCode": 200, "providers": providers})
-        except Exception as e:
-            return jsonify({"statusCode": 500, "error": "Erreur interne. Veuillez réessayer plus tard."})
+    # @staticmethod
+    # def get_videos(movie_id):
+    #     try:
+    #         videos = MovieService.get_videos(movie_id)
+    #         return jsonify({"statusCode": 200, "videos": videos})
+    #     except Exception as e:
+    #         return jsonify({"statusCode": 500, "error": f"Erreur interne. {str(e)}"})
+
+    # @staticmethod
+    # def get_watch_providers(movie_id):
+    #     try:
+    #         providers = MovieService.get_watch_providers(movie_id)
+    #         return jsonify({"statusCode": 200, "providers": providers})
+    #     except Exception as e:
+    #         return jsonify({"statusCode": 500, "error": f"Erreur interne. {str(e)}"})

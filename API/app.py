@@ -6,12 +6,15 @@ import os
 from flask import Flask
 from flask_jwt_extended import JWTManager
 from flask_cors import CORS
+from services.movie_service import MovieService
 
 from routes.user_route import user_blueprint
 from routes.movie_route import movie_blueprint
 
 app = Flask(__name__)
 app.secret_key = 'ProjetFlaskAPI'
+
+MovieService.build_index()
 
 # Configurer paramètres de JWT
 app.config['JWT_SECRET_KEY'] = os.environ.get('JWT_SECRET_KEY', 'VideoLibManager')

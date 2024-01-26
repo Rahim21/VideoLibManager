@@ -16,7 +16,7 @@ class UserController:
             else:
                 return jsonify({"statusCode": 400, "error": "L'utilisateur existe déjà."})
         except Exception as e:
-            return jsonify({"statusCode": 500, "error": "Erreur interne. Veuillez réessayer plus tard."})
+            return jsonify({"statusCode": 500, "error": f"Erreur interne. {str(e)}"})
 
     @staticmethod
     def login_user():
@@ -33,7 +33,7 @@ class UserController:
             else:
                 return jsonify({"statusCode": 400, "error": "Identifiants incorrects."})
         except Exception as e:
-            return jsonify({"statusCode": 500, "error": "Erreur interne. Veuillez réessayer plus tard."})
+            return jsonify({"statusCode": 500, "error": f"Erreur interne. {str(e)}"})
 
     @staticmethod
     def logout_user():
@@ -41,7 +41,7 @@ class UserController:
             response = UserService.logout_user(make_response())
             return jsonify({"statusCode": 200, "message": "Déconnexion réussie.", "response":response})
         except Exception as e:
-            return jsonify({"statusCode": 500, "error": "Erreur interne. Veuillez réessayer plus tard."})
+            return jsonify({"statusCode": 500, "error": f"Erreur interne. {str(e)}"})
         
     @staticmethod
     def get_users():
@@ -49,7 +49,7 @@ class UserController:
             users = UserService.get_users()
             return jsonify({"statusCode": 200, "users": users})
         except Exception as e:
-            return jsonify({"statusCode": 500, "error": "Erreur interne. Veuillez réessayer plus tard."})
+            return jsonify({"statusCode": 500, "error": f"Erreur interne. {str(e)}"})
 
     @staticmethod
     def get_user(user_id):
@@ -59,7 +59,7 @@ class UserController:
                 return jsonify({"statusCode": 200, "user": None})
             return jsonify({"statusCode": 200, "user": user})
         except Exception as e:
-            return jsonify({"statusCode": 500, "error": "Erreur interne. Veuillez réessayer plus tard."})
+            return jsonify({"statusCode": 500, "error": f"Erreur interne. {str(e)}"})
    
     @staticmethod 
     def edit_user(user_id, updated_data):
@@ -69,7 +69,7 @@ class UserController:
                 return jsonify({"statusCode": 200, "user": None})
             return jsonify({"statusCode": 200, "user": user})
         except Exception as e:
-            return jsonify({"statusCode": 500, "error": "Erreur interne. Veuillez réessayer plus tard."})
+            return jsonify({"statusCode": 500, "error": f"Erreur interne. {str(e)}"})
 
     @staticmethod
     def delete_user(user_id):
@@ -79,4 +79,4 @@ class UserController:
                 return jsonify({"statusCode": 200, "user": None})
             return jsonify({"statusCode": 200, "user": user})
         except Exception as e:
-            return jsonify({"statusCode": 500, "error": "Erreur interne. Veuillez réessayer plus tard."})
+            return jsonify({"statusCode": 500, "error": f"Erreur interne. {str(e)}"})
