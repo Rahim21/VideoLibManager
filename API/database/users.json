@@ -1,34 +1,5 @@
 [
   {
-    "id": 1,
-    "email": "john.doe@example.com",
-    "password": "pbkdf2:sha256:600000$aGZ7LeK1KyGzhS1F$f9d068d156b36f80cb871394a76ebd96c1417f2c3d92c54e884b293017b93ce4",
-    "nom": "Doe",
-    "prenom": "John",
-    "pseudo": "jojo123",
-    "age": 25
-  },
-  {
-    "id": "0070a122-e2a6-45b0-b2db-fa7d123ea6e5",
-    "email": "email@email.com",
-    "password": "pbkdf2:sha256:600000$PMMmuMiDgfqWN38f$84cb9dbfdc6f8c0742d4c8012d75966267dcc476efa2ebc004dfb82a33acedcb",
-    "nom": null,
-    "prenom": null,
-    "pseudo": "a",
-    "age": null,
-    "is_active": true
-  },
-  {
-    "id": "4825baeb-7ae3-4053-bd80-84e1ebfbeab7",
-    "email": "digita@digital.com",
-    "password": "pbkdf2:sha256:600000$VjGzHIJumHiVY3B5$be088c35181e26e7a2ab4fe7210cd22a35008a103f548a75f8944ffc9feb487c",
-    "nom": null,
-    "prenom": null,
-    "pseudo": "digita",
-    "age": null,
-    "is_active": true
-  },
-  {
     "id": "5470c806-8aaa-402b-a866-4229fe23a740",
     "email": "user@email.com",
     "password": "pbkdf2:sha256:600000$vZFSKI7ZAWaxWpSd$47234e92c87597f7dc9d15b730e38fdcc02cdc8bbab3aadf19c73bc71ad0440c",
@@ -36,46 +7,18 @@
     "prenom": null,
     "pseudo": "user",
     "age": null,
-    "is_active": true
+    "role": "admin",
+    "is_active": false
   },
   {
-    "id": "8bedb666-4220-4f5f-8d39-2bc6afdcde84",
-    "email": "admin@admin.co",
-    "password": "pbkdf2:sha256:600000$4FgcChUQJcAQG0vm$b55d99dc326253ca06d4fbfe0a08818e16e5e640aa2918fd2c387f0e2a7e882f",
-    "nom": null,
-    "prenom": null,
-    "pseudo": "admin",
-    "age": null,
-    "is_active": true
-  },
-  {
-    "id": "2b24afac-2bd4-4cf5-a4fb-6fcdba6add88",
-    "email": "nouveau@email.com",
-    "password": "pbkdf2:sha256:600000$aEYtx1ZmcY0OYwro$11f6915658f81264f974aba53a2a3cf2dfaf7519417e95c45c2d916f05dcec0d",
-    "nom": null,
-    "prenom": null,
-    "pseudo": "nouveau",
-    "age": null,
-    "is_active": true
-  },
-  {
-    "id": "60cb6813-e498-4bce-a020-f219008d3532",
-    "email": "salut@yopmail.com",
-    "password": "pbkdf2:sha256:600000$kGeADEayt0NS4aOD$3cdca7db06243ea5a645260daa48b5ef1945f0d710485eadd9b3cb9b0382c15e",
-    "nom": null,
-    "prenom": null,
-    "pseudo": "salut",
-    "age": null,
-    "is_active": true
-  },
-  {
-    "id": "682e4b2d-4f21-4377-be8e-ea58cc9b9c85",
-    "email": "test@gmail.com",
-    "password": "pbkdf2:sha256:600000$UvGR1Rqo0ZybSKjf$7c50e0c2426a4d253f957d5489d94f67a9db92787f3f300e3052476bdf3cfc53",
-    "nom": null,
-    "prenom": null,
-    "pseudo": "drio0004",
-    "age": null,
-    "is_active": true
+    "id": "ed0e3e93-8597-4dc1-aaa2-a12d41f6174c",
+    "email": "samidriouche@yahoo.fr",
+    "password": "pbkdf2:sha256:600000$RysbQTyL94lDKeqt$18f87f03ccfd9e31c3360a63420a911b34f4056c1013998a556d5c4d65bc9a58",
+    "nom": "Driouche",
+    "prenom": "sami",
+    "pseudo": "pseudo",
+    "age": "22",
+    "role": "admin",
+    "is_active": false
   }
 ]

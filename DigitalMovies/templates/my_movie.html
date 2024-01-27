@@ -1,0 +1,68 @@
+{% extends 'layouts/app.html' %}
+
+{% block content %}
+<h1 id="titre_movie">All movies</h1>
+
+
+<!-- Card pour les films -->
+<section>
+    <h1>My movie</h1>
+    <i class="bi bi-chevron-left"></i>
+    <i class="bi bi-chevron-right"></i>
+    <div class="cards">
+    
+      {% for movie in datas.json.data.movies %}
+    <div class="card" id="card" data-id="{{ movie.id }}">
+      <img src="{{movie.poster_path}}" alt="" class="poster">
+            <div class="rest_card">
+             
+              <div class="cont">
+                <h4>{{ movie.title }}</h4>
+                  <div class="sub">
+                    <p>{{ movie.genres }}, {{ movie.release_date}}</p>
+                  <h3><span>Note : </span><i class="bi bi-star-fill"></i> {{movie.vote_average}}</h3>
+                  </div>
+                </div>
+              </div>
+          </div>
+      {% endfor %}
+
+    </div>
+</section>
+
+<!-- ajouter le edit ici -->
+<div id="form" style="display: none;">
+  {% include 'update_movie.html' %}
+</div>
+<script>
+  // Sélectionnez tous les éléments de la carte
+  var cards = document.querySelectorAll('.card');
+  var form = document.getElementById('form');
+  var currentMovieId = null;
+
+  // Ajoutez un écouteur d'événements à chaque carte
+  cards.forEach(function(card) {
+    card.addEventListener('click', function() {
+      var movieId = this.getAttribute('data-id');
+
+      // Si le formulaire est déjà ouvert pour ce film, fermez-le
+      if (currentMovieId === movieId) {
+        form.style.display = 'none';
+        currentMovieId = null;
+      } else {
+        // Faites une requête fetch pour obtenir le contenu de update_movie.html
+        fetch('/edit_page/' + movieId)
+          .then(response => response.text())
+          .then(html => {
+            // Insérez le contenu HTML dans le formulaire
+            form.innerHTML = html;
+            form.style.display = 'block';
+            currentMovieId = movieId;
+          });
+      }
+    });
+  });
+</script>
+
+</html>
+{% endblock %}

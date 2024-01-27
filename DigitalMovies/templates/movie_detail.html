@@ -17,11 +17,7 @@
                   <h4 id="titre_film">{{ movie.title }}</h4>
                 </div>
             </div>
-            <div class="div">
-                <div class="breadcrumb-divider">
-                    <div class="text-wrapper-2">/</div>
-                </div>
-            </div>
+            
            
         </div>
         <div class="text-wrapper-3">{{movie.name}}</div>
@@ -54,14 +50,18 @@
                 
                 {% for genre in movie.genres %}
                 <p>{{ genre.name }}<p>
+                    
                 {% endfor %}
-
+                <br>
+                <!-- fait une petite barre hr -->
+                <hr>
+                
+                <br>
                 <div class="btns">
-                    <a href="#" id="play" data-toggle="modal" data-target="#myModal">Watch <i class="bi bi-play-fill"></i></a>
-                    <a href="#" id="download_main">Download <i class="bi bi-cloud-arrow-down-fill"></i></a>
-                </div>
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/{{data_video}}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
                 <!-- Fenêtre Modale Bootstrap -->
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <!-- <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -74,7 +74,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
             </div></div>
 
           
@@ -88,10 +88,6 @@
     </div>
 
 <div >
-
-
-    
-
     <!-- Ajouter le lien vers la bibliothèque Bootstrap JS et la bibliothèque Popper.js -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>

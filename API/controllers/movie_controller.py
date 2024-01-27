@@ -26,9 +26,9 @@ class MovieController:
             return jsonify({"statusCode": 500, "error": f"Erreur interne. {str(e)}"})
 
     @staticmethod
-    def add_movie(movie_data):
+    def add_movie(movie_data, user_id):
         try:
-            movie = MovieService.create_movie(movie_data)
+            movie = MovieService.create_movie(movie_data, user_id)
             if movie:
                 return jsonify({"statusCode": 201, "movie": movie})
             else:

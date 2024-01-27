@@ -3,7 +3,7 @@
 # -----------------------------------------------------------------------------
 # models/movie_model.py
 class Movie:
-    def __init__(self, id, title, overview=None, release_date=None, genres=None, poster_path=None, countries=None, vote_average=None, vote_count=None, images=None, comments=None, ratings=None):
+    def __init__(self, id, title, user_id, overview=None, release_date=None, genres=None, poster_path=None, countries=None, vote_average=None, vote_count=None, images=None, comments=None, ratings=None):
         self.id = id
         self.title = title
         self.overview = overview
@@ -16,3 +16,4 @@ class Movie:
         self.images = images if images is not None else []
         self.comments = comments if comments is not None else []
         self.ratings = ratings if ratings is not None else []
+        self.user_id = user_id

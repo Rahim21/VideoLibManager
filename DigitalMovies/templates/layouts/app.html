@@ -12,7 +12,7 @@
 </head>
 <body>
     <header>
-        <!-- <video src="video/jurasic world.webm" autoplay muted></video> -->
+        
         <nav>
             <!-- navbar -->
             <div class="logo_ul">
@@ -23,11 +23,11 @@
                     </li>
                     {% if cookie %}
                     <li>
-                        <a href="{{ url_for('page.add_movie') }}" id="add_movie">Add Movie</a>
+                        <a href="{{ url_for('page.add_movie') }}" id="add_new_movie">Add Movie</a>
                     </li>
                     {% endif %}
                     <li>
-                        <a href="#" id="movies">Movies</a>
+                        <a href="{{ url_for('page.my_movie') }}" id="movies">My Movies</a>
                     </li>
                 </ul>
             </div>

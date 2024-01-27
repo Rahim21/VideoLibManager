@@ -7,6 +7,7 @@ import requests
 import jwt
 from .rule_route import require_token
 from controllers.user_controller import UserController
+from controllers.movie_controller import MovieController
 
 page_blueprint = Blueprint('page', __name__)
 
@@ -46,7 +47,12 @@ def add_movie():
     token = g.token
     return render_template('add_movie.html', cookie=token)
 
-
+@page_blueprint.route('/movie/list', methods=['GET'])
+@require_token
+def my_movie():
+    token = g.token
+    data =  MovieController.get_movies()
+    return render_template('my_movie.html', cookie=token , datas=data)
 
 
 @page_blueprint.route('/movie_detail/<int:movie_id>', methods=['GET'])
@@ -79,7 +85,19 @@ def show_profile():
     token = g.token
     decoded_token = jwt.decode(token, options={'verify_signature': False})
     user_id = decoded_token.get('sub')
-    print(f"There is my user id : {user_id}")
     user_data = UserController.get_user(user_id, f'/{str(user_id)}', 'GET')
-    print(f"There is my user data : {(user_data)}")
     return render_template('profile.html', cookie=token, data=user_data)
+
+@page_blueprint.route('/profile/dashboard', methods=['GET'])
+@require_token
+def show_dashboard():
+    token = g.token
+    users_data = UserController.get_users('GET')
+    return render_template('dashboard.html', cookie=token , data=users_data)
+
+@page_blueprint.route('/edit_page/<int:movie_id>', methods=['GET'])
+@require_token
+def show_edit(movie_id):
+    token = g.token
+    data = MovieController.get_movie(movie_id)
+    return render_template('update_movie.html', cookie=token, data=data)

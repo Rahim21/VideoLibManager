@@ -1,0 +1,76 @@
+{% extends 'layouts/app.html' %}
+
+{% block search_bar %}
+
+
+<div class="btns">
+  <a href="{{ url_for('page.show_dashboard') }}" id="play">Dashboard <i class="bi bi-play-fill"></i></a>
+</div>
+{% endblock %}
+
+{% block content %}
+    <br><br>
+    <h1 id="titre_movie">All Users</h1>
+ 
+      
+     
+    <!-- <section class="Dashboard_table" id="inscription-form"> -->
+
+    <div class="tableau">
+        <table>
+            <tr> 
+                <th>Nom  </th>
+                <th> Prenom </th>
+                <th>  Pseudo</th>
+                <th>  Email</th>
+                <th>  is Active </th>
+              
+            </tr> 
+            {% for user in data.json.data.users %}
+            
+            <div class="tableau_ligne"></div>
+            <tr>
+                <td> {{user.nom}}</td>
+                <td> {{user.prenom}}</td> 
+                <td>  {{user.pseudo}}</td>
+                <td>  {{user.email}}</td>
+                <td> 
+                    {% if user.is_active %}
+                        <span class="status-circle status-circle-green"></span>
+                    {% else %}
+                        <span class="status-circle status-circle-red"></span>
+                    {% endif %}
+                    <style>
+                        .status-circle {
+                            display: inline-block;
+                            width: 10px;
+                            height: 10px;
+                            border-radius: 50%;
+                        }
+
+                        .status-circle-green {
+                            background-color: green;
+                        }
+
+                        .status-circle-red {
+                            background-color: red;
+                        }
+                    </style>
+                </td>
+                <td><a class="mylink" href="">Show</a></td>
+                <td>
+                <form method="POST" action="{{ url_for('user.delete_user', user_id=user.id) }}">
+                    <input type="hidden" name="_method" value="DELETE">
+                    <button type="submit" class="mylink2">Delete</button>
+                </form></td> 
+            </tr> 
+           </div>
+             {% endfor %}
+        </table>
+    </div>
+    <!-- </section> -->
+        
+        
+
+   
+{% endblock %}

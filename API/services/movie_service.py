@@ -23,11 +23,12 @@ class MovieService:
         return None
 
     @staticmethod
-    def create_movie(movie_data):
+    def create_movie(movie_data, user_id):
         movies = MovieService._load_movies()
         max_id = max(movie['id'] for movie in movies) if movies else 0
         new_movie = Movie(id=max_id + 1, **movie_data)
         movies.append(vars(new_movie))  # Use vars() to convert the object to a dictionary
+        new_movie.user_id = user_id
         MovieService._save_movies(movies)
         return new_movie.__dict__
 

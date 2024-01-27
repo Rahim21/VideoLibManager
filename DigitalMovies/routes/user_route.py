@@ -2,15 +2,17 @@
 # Auteurs: HAYAT Rahim et DRIOUCHE Sami
 # -----------------------------------------------------------------------------
 # routes/user_route.py
-from flask import Blueprint, request, render_template, make_response, redirect, url_for, session
+from flask import Blueprint, request, render_template, make_response, redirect, url_for, session, g
 import requests
 from controllers.user_controller import UserController
+from .rule_route import require_token
 
 user_blueprint = Blueprint('user', __name__, url_prefix='/users')
 
 @user_blueprint.route('/register', methods=['POST'])
 def register():
-    return UserController.register_user(request, request.endpoint, request.method)
+    data = UserController.register_user(request, request.endpoint, request.method)
+    return render_template('login.html', data=data)
 
 @user_blueprint.route('/login', methods=['POST'])
 def login():
@@ -36,17 +38,22 @@ def logout():
 
 @user_blueprint.route('/', methods=['GET'])
 def get_users():
-    return UserController.get_users(request.endpoint, request.method)
+    return UserController.get_users(request.method)
 
 @user_blueprint.route('/<string:user_id>', methods=['GET'])
 def get_user(user_id):
     return UserController.get_user(user_id, request.endpoint, request.method)
 
 @user_blueprint.route('/<string:user_id>/edit', methods=['POST'])
+@require_token
 def edit_user(user_id):
-    return UserController.edit_user(user_id, request, f'{user_id}/edit', "PUT")
-    #return url_for('page.index')
+    user_data = UserController.edit_user(user_id, request, f'{user_id}/edit', "PUT")
+    #retourne la page de l'utilisateur modifié
+    return render_template('profile.html', data=user_data , cookie=g.token) 
 
-@user_blueprint.route('/<string:user_id>/delete', methods=['DELETE'])
+@user_blueprint.route('/<string:user_id>/delete', methods=['POST'])
+@require_token
 def delete_user(user_id):
-    return UserController.delete_user(user_id, request.endpoint, request.method)
+    UserController.delete_user(f'{user_id}/delete', 'DELETE')
+    users_data = UserController.get_users('GET')
+    return render_template('dashboard.html', data=users_data , cookie=g.token) 

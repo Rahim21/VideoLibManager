@@ -21,7 +21,8 @@ def get_movie(movie_id):
 @movie_blueprint.route('/add', methods=['POST'])
 @jwt_required()
 def add_movie():
-    return MovieController.add_movie(request.json)
+    user_id = get_jwt_identity()
+    return MovieController.add_movie(request.json, user_id)
 
 @movie_blueprint.route('/<int:movie_id>/edit', methods=['PUT'])
 @jwt_required()
