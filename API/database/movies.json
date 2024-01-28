@@ -120,5 +120,21 @@
     "ratings": [],
     "user_id": "ed0e3e93-8597-4dc1-aaa2-a12d41f6174c",
     "private": true
+  },
+  {
+    "id": 9,
+    "title": "Mon super film",
+    "overview": "C'est un film, tr\u00e8s court, un bon film et voil\u00e0 !",
+    "release_date": null,
+    "genres": "Dramatique",
+    "poster_path": "https://cdn4.sharechat.com/superwallpaper_371f22ad_1659238818168_sc_cmprsd_75.jpg?tenant=sc&referrer=tag-service&f=rsd_75.jpg",
+    "countries": "None",
+    "vote_average": null,
+    "vote_count": null,
+    "images": [],
+    "comments": [],
+    "ratings": [],
+    "user_id": "5470c806-8aaa-402b-a866-4229fe23a740",
+    "private": false
   }
 ]

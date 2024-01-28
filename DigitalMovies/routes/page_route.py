@@ -47,6 +47,32 @@ def add_movie():
     token = g.token
     return render_template('add_movie.html', cookie=token)
 
+@page_blueprint.route('/show_movie/<int:movie_id>', methods=['GET'])
+@require_token
+def show_movie(movie_id):
+    token = g.token
+    decoded_token = jwt.decode(token, options={'verify_signature': False})
+    user_id = decoded_token.get('sub')
+
+    data = MovieController.get_movie(movie_id)
+    reponse = data.json
+    movie = reponse['data']['movie']
+    # Note utilisateur
+    user_rating = None
+    if movie.get('ratings'):
+        for rating in movie['ratings']:
+            if rating['user_id'] == user_id:
+                user_rating = rating['rating']
+                break
+
+    # Moyenne de notation du film
+    if movie.get('ratings'):
+        total_ratings = sum(int(rating['rating']) for rating in movie['ratings'])
+        average_rating = total_ratings / len(movie['ratings'])
+    else:
+        average_rating = None
+    return render_template('show_movie.html',data=data , cookie=token, average_rating=average_rating, user_rating=user_rating, current_user_id=user_id)
+
 @page_blueprint.route('/movie/list', methods=['GET'])
 @require_token
 def my_movie():
@@ -63,9 +89,7 @@ def search_id(movie_id):
     url = "https://api.themoviedb.org/3/movie/"+str(movie_id)+"?api_key=8770fea03d8b0d550c4b50be1656d5cb&language=en-US"
     reponse = requests.get(url)
     if reponse.status_code == 200:
-
         data = reponse.json()
-    
         url_video = "https://api.themoviedb.org/3/movie/"+str(movie_id)+"/videos?api_key=8770fea03d8b0d550c4b50be1656d5cb&language=en-US"
         reponse_video = requests.get(url_video)
         data_video = reponse_video.json()

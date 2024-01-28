@@ -1005,8 +1005,53 @@ th {
     text-decoration: none;
     float: right;
 }
+
+.monbouton2 {
+    background-color: blue;
+    border-color: blue;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    float: right;
+}
 .monbouton:hover {
     color: #fff;
     border-color: #ff5656;
     background-color: #ff5656;
+}
+
+.monbouton2:hover {
+    color: #fff;
+    border-color: #5667ff;
+    background-color: #6156ff;
+}
+
+/* ----- Rating Movie ----- */
+.star {
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.yellow {
+    color: gold;
+}
+
+.star:hover,
+.star:hover ~ .star {
+    color: gold;
+}
+
+.rating {
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: row-reverse;
+}
+
+span.note {
+    padding-right: 1rem;
+}
+
+.note {
+    text-align: -webkit-left;
 }

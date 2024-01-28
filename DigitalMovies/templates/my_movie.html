@@ -54,39 +54,88 @@
     </div>
 </section>
 
-<!-- ajouter le edit ici -->
-<div id="form" style="display: none;">
-  {% include 'update_movie.html' %}
+
+
+
+
+<!-- Pop-up pour afficher les détails du film -->
+<div id="showMoviePopup" class="popup">
+  <div class="popup-content">
+    <span class="close" onclick="closePopup('showMoviePopup')">&times;</span>
+    <!-- Contenu du film à afficher -->
+    <div id="showMovieContent"></div>
+  </div>
 </div>
+
+<!-- Pop-up pour mettre à jour le film -->
+<div id="updateMoviePopup" class="popup">
+  <div class="popup-content">
+    <span class="close" onclick="closePopup('updateMoviePopup')">&times;</span>
+    <!-- Contenu du formulaire de mise à jour du film -->
+    <div id="updateMovieContent"></div>
+  </div>
+</div>
+
 <script>
-  // Sélectionnez tous les éléments de la carte
-  var cards = document.querySelectorAll('.card');
-  var form = document.getElementById('form');
-  var currentMovieId = null;
+  document.addEventListener("DOMContentLoaded", function() {
+    var cards = document.querySelectorAll('.card');
+    cards.forEach(function(card) {
+      card.addEventListener('click', function() {
+        var movieId = this.getAttribute('data-id');
+        showMovieDetails(movieId);
+      });
+    });
 
-  // Ajoutez un écouteur d'événements à chaque carte
-  cards.forEach(function(card) {
-    card.addEventListener('click', function() {
-      var movieId = this.getAttribute('data-id');
-
-      // Si le formulaire est déjà ouvert pour ce film, fermez-le
-      if (currentMovieId === movieId) {
-        form.style.display = 'none';
-        currentMovieId = null;
-      } else {
-        // Faites une requête fetch pour obtenir le contenu de update_movie.html
-        fetch('/edit_page/' + movieId)
-          .then(response => response.text())
-          .then(html => {
-            // Insérez le contenu HTML dans le formulaire
-            form.innerHTML = html;
-            form.style.display = 'block';
-            currentMovieId = movieId;
-          });
+    // Ajouter un écouteur d'événements pour les clics sur le fond de la page
+    document.addEventListener('click', function(event) {
+      var isClickInsideShowMoviePopup = document.getElementById('showMoviePopup').contains(event.target);
+      var isClickInsideUpdateMoviePopup = document.getElementById('updateMoviePopup').contains(event.target);
+      if (!isClickInsideShowMoviePopup && !isClickInsideUpdateMoviePopup) {
+        closeAllPopups();
       }
     });
   });
+
+  function showMovieDetails(movieId) {
+    closeAllPopups();
+
+    fetch('/show_movie/' + movieId)
+      .then(response => response.text())
+      .then(html => {
+        var popupContent = document.getElementById('showMovieContent');
+        popupContent.innerHTML = html;
+        openPopup('showMoviePopup');
+      });
+  }
+
+  function openUpdatePopup(movieId) {
+    closePopup('showMoviePopup');
+    fetch('/edit_page/' + movieId)
+      .then(response => response.text())
+      .then(html => {
+        var popupContent = document.getElementById('updateMovieContent');
+        popupContent.innerHTML = html;
+        openPopup('updateMoviePopup');
+      });
+  }
+
+  function openPopup(popupId) {
+    var popup = document.getElementById(popupId);
+    popup.style.display = 'block';
+  }
+
+  function closePopup(popupId) {
+    var popup = document.getElementById(popupId);
+    popup.style.display = 'none';
+  }
+
+  function closeAllPopups() {
+    closePopup('showMoviePopup');
+    closePopup('updateMoviePopup');
+  }
 </script>
+
+
 
 </html>
 {% endblock %}

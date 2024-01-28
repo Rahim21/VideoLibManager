@@ -1,0 +1,198 @@
+
+
+
+
+<br><br><br><br>
+<h1 id="titre_movie">Update movie</h1>
+<link rel="stylesheet" href="{{url_for('static', filename = 'css/profil.css')}}">
+<link rel="stylesheet" href="{{url_for('static', filename = 'css/style.css')}}">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+<div class="main-content">
+
+
+<!-- Page content -->
+<div class="container-fluid mt--7">
+  
+
+
+    <div class="col-xl-8 order-xl-1">
+      <div class="card bg-secondary shadow">
+        <div class="card-header bg-white border-0">
+          <div class="row align-items-center">
+            <div class="col-8">
+          <h3 class="mb-0">{{ data.json.data.movie.title if data }}</h3>
+            </div>
+
+
+<!-- DEBUT ETOILE -->
+<div class="col-4 text-right">
+    <div class="rating" data-movie-id="{{ data.json.data.movie.id if data }}">
+        {% for star_value in range(5, 0, -1) %}
+            <span class="star {% if user_rating is defined and user_rating|int >= star_value %}yellow{% endif %}" data-value="{{ star_value }}" onclick="submitRating(this)">☆</span>
+        {% endfor %}
+        <span class="note">Modifier la note : </span>
+    </div>
+    <!-- texte en gras dans le style -->
+    <div class="note">Note moyenne :
+        <bold style="color:#9289f6; font: caption; font-size: 1.5rem;">
+            {% if average_rating %}
+                {{ average_rating }}/5
+            {% else %}
+                Aucune évaluation
+            {% endif %}
+        </bold>
+    </div>
+    <!-- FIN note -->
+  </div>
+  <script>
+    function submitRating(element) {
+        var ratingValue = element.getAttribute("data-value");
+        var movieId = element.closest('.rating').getAttribute("data-movie-id");
+  
+        if (movieId) {
+            // Modification ici : Utilisation de Jinja pour générer l'URL
+            var url = "{{ url_for('movie.add_rating', movie_id=data.json.data.movie.id) }}";
+  
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ rating: ratingValue }),
+            })
+            .then(response => {
+                if (response.ok) {
+                    console.log("Note soumise avec succès!");
+                    // Mettre à jour l'interface utilisateur ou effectuer d'autres actions si nécessaire
+                } else {
+                    console.error("Erreur lors de la soumission de la note");
+                }
+            })
+            .catch(error => {
+                console.error("Erreur lors de la soumission de la note:", error);
+            });
+        } else {
+            console.error("Impossible de récupérer l'ID du film.");
+        }
+    }
+</script>
+  
+  <style>
+    .star {
+        cursor: pointer;
+        transition: color 0.2s;
+    }
+  
+    .yellow {
+        color: gold;
+    }
+  
+    .star:hover,
+    .star:hover ~ .star {
+        color: gold;
+    }
+  
+    .rating {
+        display: flex;
+        justify-content: flex-end;
+        flex-direction: row-reverse;
+    }
+  
+    span.note {
+        padding-right: 1rem;
+    }
+  
+    .note {
+        text-align: -webkit-left;
+    }
+  </style>
+  <!-- FIN ETOILE -->
+
+
+          </div>
+        </div>
+        <div class="card-body">
+            <button class="btn btn-icon btn-3 btn-primary monbouton2" onclick="openUpdatePopup('{{ data.json.data.movie.id if data }}')">Modifier le film</button>
+           <form action="{{ url_for('movie.delete_movie' , movie_id=data.json.data.movie.id) if data}}" method="post">
+            <button class="btn btn-icon btn-3 btn-primary monbouton" type="submit">
+              <span class="btn-inner--icon"><i class="ni ni-bag-17"></i></span>
+              <span class="btn-inner--icon"><i class="bi bi-trash"></i></span>
+              <span class="btn-inner--text">Delete</span>
+            </button>
+
+          </form>
+
+            <h6 class="heading-small text-muted mb-4">Movie information</h6>
+          
+            <div class="container">
+                <div class="row">
+                  <div class="col-lg-4">
+                    <div class="movie-image">
+                      <img src="{{data.json.data.movie.poster_path if data}}" alt="Movie Poster">
+                    </div>
+                  </div>
+                  <div class="col-lg-8">
+                    <div class="movie-info">
+                      <h2>{{data.json.data.movie.title if data}}</h2>
+                      <p>{{data.json.data.movie.release_date if data}}</p>
+                      <p>{{data.json.data.movie.genres if data}}</p>
+                      <p>{{data.json.data.movie.countries if data}}</p>
+                      <p>{{data.json.data.movie.private if data}}</p>
+                      <p>{{data.json.data.movie.overview if data}}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+<style>
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.col-lg-4 {
+  width: 40%;
+}
+
+.col-lg-8 {
+  width: 60%;
+}
+
+.movie-info {
+  text-align: left;
+}
+
+.movie-info h2 {
+  margin-bottom: 10px;
+}
+
+.movie-image img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  max-width: 400px; /* Taille maximale de l'image */
+}
+
+.movie-overview {
+  text-align: left;
+}
+
+</style>
+<hr class="my-4">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+

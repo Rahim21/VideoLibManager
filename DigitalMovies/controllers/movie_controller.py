@@ -47,6 +47,7 @@ class MovieController:
 
     @staticmethod
     def edit_movie(updated_data, route_url, method):
+        private = updated_data.form.get('private', '')
         title, overview, release_date, genres, poster_path, countries, vote_average, vote_count, images = (
             updated_data.form.get(field, '') for field in ['title', 'overview', 'release_date', 'genres', 'poster_path', 'countries', 'vote_average', 'vote_count', 'images']
         )
@@ -60,7 +61,8 @@ class MovieController:
                 "countries": countries,
                 "vote_average": vote_average,
                 "vote_count": vote_count,
-                "images": images if isinstance(images, list) else []
+                "images": images if isinstance(images, list) else [],
+                "private": private
             }.items() if value
         }
         url = "{}/{}".format(MovieController.movie_url, route_url)

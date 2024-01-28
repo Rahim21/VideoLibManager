@@ -2,31 +2,32 @@
 
 {% block search_bar %}
 <input type="text" placeholder="Search..." id="search_input">
+
 {% endblock %}
 
 {% block content %}
         
-        <!-- grille pour les films -->
-        <section>
-            <h4>Popular</h4>           
-               <div class="grille">
-                {% for movie in movies %}
-                <div class="grid-item">
-                    <a href="{{ url_for('page.search_id', movie_id=movie.id) }}">
-                        <img src="https://image.tmdb.org/t/p/w342/{{ movie.poster_path }}" alt="{{ movie.title }} ">
-                        <div class="cont"> 
-                            <h4 id="titre_film">
-                                {{ movie.title }}
-                            </h4>
-                            <div class="sub">
-                            <p>{{ movie.release_date }}, <span>IMDB  </span><i class="bi bi-star-fill"></i> {{ movie.vote_average }}</p></div>
-                        </div>
-                    </a>
+<!-- grille pour les films -->
+<section>
+    <h4>Popular</h4>           
+        <div class="grille">
+        {% for movie in movies %}
+        <div class="grid-item">
+            <a href="{{ url_for('page.search_id', movie_id=movie.id) }}">
+                <img src="https://image.tmdb.org/t/p/w342/{{ movie.poster_path }}" alt="{{ movie.title }} ">
+                <div class="cont"> 
+                    <h4 id="titre_film">
+                        {{ movie.title }}
+                    </h4>
+                    <div class="sub">
+                    <p>{{ movie.release_date }}, <span>IMDB  </span><i class="bi bi-star-fill"></i> {{ movie.vote_average }}</p></div>
                 </div>
-                {% endfor %}
-                
-               </div>
-                              
-        </section>
+            </a>
+        </div>
+        {% endfor %}
+        
+        </div>
+                        
+</section>
    
 {% endblock %}
