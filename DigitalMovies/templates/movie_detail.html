@@ -2,13 +2,7 @@
 
 {% block content %}
 
-
-
- 
 <div class="details-page">
-    
-    
-    
     <img class="img myimage" src="https://image.tmdb.org/t/p/w1920_and_h800_multi_faces/{{ movie.backdrop_path }}" alt="{{ movie.title }} ">
     <div class="frame">
         <div class="div">
@@ -16,71 +10,46 @@
                 <div class="text-wrapper">
                   <h4 id="titre_film">{{ movie.title }}</h4>
                 </div>
-            </div>
-            
-           
+            </div>  
         </div>
         <div class="text-wrapper-3">{{movie.name}}</div>
-    </div>
-    
-</div>
-<div class="details_movie">
-    
-<div id="element_movie_detail">
-    <div class="col" id="image_film">
-         <img class="image_poster_film" src="https://image.tmdb.org/t/p/w342/{{ movie.poster_path }}" alt="{{ movie.title }} ">
-    </div>
-       
-    <div class="col" >
-
-           
-        <div class="content ">
-            <h1 id="title">{{ movie.original_title }}</h1>
-            <br>
-            <p>{{ movie.overview }}</p>
-            <br>
-            <div class="details ">
-                <br>
-                <h4>{{ movie.release_date }}</h4>
-                <h3 id="rate"><span>IMDB</span><i class="bi bi-star-fill"></i> {{ movie.vote_average }}</h3>
-            </div>
-            <div class="details "></div>
-            <br>
-            
-            <p>Genre :</p>
-            <div class="genre-container">
-                {% for genre in movie.genres %}
-                    <span>{{ genre.name }}</span>
-                {% endfor %}
-            </div>
-
-            <br>
-            <!-- fait une petite barre hr -->
-            <hr>
-            
-            <br>
-            <div class="btns">
-                <iframe width="560" height="315" src="https://www.youtube.com/embed/{{data_video}}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-    </div>
-                <!-- Fenêtre Modale Bootstrap -->
-    <!-- <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Image Modal</h5>
-                    
-                </div>
-                <div class="modal-body">
-                    <iframe width="560" height="315" src="https://www.youtube.com/embed/{{data_video}}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-    
-                </div>
-            </div>
         </div>
-    </div> -->
-            </div></div>
+    </div>
 
-          
-                
+
+    <div class="details_movie">
+        <div id="element_movie_detail">
+            <div class="col" id="image_film">
+                <img class="image_poster_film" src="https://image.tmdb.org/t/p/w342/{{ movie.poster_path }}" alt="{{ movie.title }} ">
+            </div>
+            <div class="col" >
+                <div class="content ">
+                    <h1 id="title">{{ movie.original_title }}</h1>
+                    <br>
+                    <p>{{ movie.overview }}</p>
+                    <br>
+                    <div class="details ">
+                        <br>
+                        <h4>{{ movie.release_date }}</h4>
+                        <h3 id="rate"><span>IMDB</span><i class="bi bi-star-fill"></i> {{ movie.vote_average }}</h3>
+                    </div>
+                    <div class="details "></div>
+                    <br>
+                    <p>Genre :</p>
+                        <div class="genre-container">
+                            {% for genre in movie.genres %}
+                                <span>{{ genre.name }}</span>
+                            {% endfor %}
+                        </div>
+                    <br>
+                    <hr>
+                    
+                    <br>
+                    <div class="btns">
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/{{data_video}}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+               
+            </div></div>
                 
             </div>
             

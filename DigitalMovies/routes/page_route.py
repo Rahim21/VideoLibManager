@@ -51,8 +51,10 @@ def add_movie():
 @require_token
 def my_movie():
     token = g.token
+    decoded_token = jwt.decode(token, options={'verify_signature': False})
+    current_user_id = decoded_token.get('sub')
     datas =  MovieController.get_movies()
-    return render_template('my_movie.html', cookie=token , datas=datas)
+    return render_template('my_movie.html', cookie=token , datas=datas, current_user_id=current_user_id)
 
 
 @page_blueprint.route('/movie_detail/<int:movie_id>', methods=['GET'])
@@ -63,8 +65,7 @@ def search_id(movie_id):
     if reponse.status_code == 200:
 
         data = reponse.json()
-        
-
+    
         url_video = "https://api.themoviedb.org/3/movie/"+str(movie_id)+"/videos?api_key=8770fea03d8b0d550c4b50be1656d5cb&language=en-US"
         reponse_video = requests.get(url_video)
         data_video = reponse_video.json()
@@ -113,10 +114,17 @@ def show_edit(movie_id):
                 user_rating = rating['rating']
                 break
 
-    # Moynne de notation du film
+    # Moyenne de notation du film
     if movie.get('ratings'):
         total_ratings = sum(int(rating['rating']) for rating in movie['ratings'])
         average_rating = total_ratings / len(movie['ratings'])
     else:
         average_rating = None
-    return render_template('update_movie.html', cookie=token, data=data, average_rating=average_rating, user_rating=user_rating)
+    return render_template('update_movie.html', cookie=token, data=data, average_rating=average_rating, user_rating=user_rating, current_user_id=user_id)
+
+@page_blueprint.route('/show_user_page/<string:user_id>', methods=['GET'])
+@require_token
+def show_user(user_id):
+    token = g.token
+    data = UserController.get_user(user_id, f'/{user_id}', "GET")
+    return render_template('show_user.html', cookie=token, data_user=data)

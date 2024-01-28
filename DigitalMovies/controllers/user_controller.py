@@ -61,8 +61,8 @@ class UserController:
 
     @staticmethod 
     def edit_user(user_id, user_data, route_url, method):
-        email, password, nom, prenom, pseudo, age, is_active = (
-            user_data.form.get(field, '') for field in ['email', 'password', 'nom', 'prenom', 'pseudo', 'age', 'is_active']
+        email, password, nom, prenom, pseudo, age, is_active, profile_picture = (
+            user_data.form.get(field, '') for field in ['email', 'password', 'nom', 'prenom', 'pseudo', 'age', 'is_active', 'profile_picture']
         )
         # Dictionnaire avec les champs non vides
         data = {
@@ -73,12 +73,18 @@ class UserController:
                 "prenom": prenom,
                 "pseudo": pseudo,
                 "age": age,
-                "is_active": is_active
+                "is_active": is_active,
+                "profile_picture": profile_picture
             }.items() if value
         }
         url = "{}/{}".format(UserController.user_url, route_url.rsplit('.', 1)[-1])
         return RequestAPI.request_to_api(method, url, data, f'User {pseudo} updated successfully!', f'Failed to update user {pseudo}!')
 
+    @staticmethod
+    def deactivate_user(route_url, method):
+        url = "{}/{}".format(UserController.user_url, route_url)
+        return RequestAPI.request_to_api(method, url, success_message=f'User deactivated successfully!', error_message=f'Failed to deactivate user!')
+    
     @staticmethod
     def delete_user(route_url, method):
         url = "{}/{}".format(UserController.user_url, route_url)

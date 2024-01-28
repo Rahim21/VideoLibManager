@@ -27,6 +27,7 @@ def login():
         resp.status_code = 302
         session['data'] = response_data
         session['username'] = response_data.get('data').get('pseudo')
+        session['profile_picture'] = response_data.get('data').get('profile_picture')
         # Redirect to the index page
         return resp
     else:
@@ -51,11 +52,19 @@ def edit_user(user_id):
     user_data = UserController.edit_user(user_id, request, f'{user_id}/edit', "PUT")
     reponse = user_data.json
     session['username'] = reponse['data']['user']['pseudo']
+    session['profile_picture'] = reponse['data']['user']['profile_picture']
     return render_template('profile.html', data=user_data , cookie=g.token) 
+
+@user_blueprint.route('/<string:user_id>/deactivate', methods=['POST'])
+@require_token
+def deactivate_user(user_id):
+    UserController.deactivate_user(f'{user_id}/deactivate', 'DELETE')
+    users_data = UserController.get_users('GET')
+    return render_template('dashboard.html', data=users_data , cookie=g.token)
 
 @user_blueprint.route('/<string:user_id>/delete', methods=['POST'])
 @require_token
 def delete_user(user_id):
     UserController.delete_user(f'{user_id}/delete', 'DELETE')
     users_data = UserController.get_users('GET')
-    return render_template('dashboard.html', data=users_data , cookie=g.token) 
+    return render_template('dashboard.html', data=users_data , cookie=g.token)

@@ -2,11 +2,11 @@
   {
     "id": 1,
     "title": "Five Night At Freddy's",
-    "overview": null,
-    "release_date": null,
-    "genres": null,
+    "overview": "Un film terrifiant",
+    "release_date": "2024-01-12",
+    "genres": "Horreur",
     "poster_path": "https://www.universalpictures.fr/tl_files/content/movies/five_nights/posters/07.jpg",
-    "countries": null,
+    "countries": "France",
     "vote_average": null,
     "vote_count": null,
     "images": [],
@@ -18,10 +18,11 @@
       },
       {
         "user_id": "5470c806-8aaa-402b-a866-4229fe23a740",
-        "rating": "4"
+        "rating": "2"
       }
     ],
-    "user_id": "ed0e3e93-8597-4dc1-aaa2-a12d41f6174c"
+    "user_id": "ed0e3e93-8597-4dc1-aaa2-a12d41f6174c",
+    "private": false
   },
   {
     "id": 2,
@@ -50,9 +51,9 @@
   {
     "id": 3,
     "title": "Suzume",
-    "overview": null,
+    "overview": "Mon film vu au cinema",
     "release_date": "2024-01-11",
-    "genres": null,
+    "genres": "None",
     "poster_path": "https://static.fnac-static.com/multimedia/Images/FD/Comete/168059/CCP_IMG_ORIGINAL/2232321.jpg",
     "countries": null,
     "vote_average": null,
@@ -65,7 +66,8 @@
         "rating": "4"
       }
     ],
-    "user_id": "ed0e3e93-8597-4dc1-aaa2-a12d41f6174c"
+    "user_id": "ed0e3e93-8597-4dc1-aaa2-a12d41f6174c",
+    "private": false
   },
   {
     "id": 4,
@@ -84,12 +86,13 @@
   },
   {
     "id": 5,
-    "title": "mon film",
+    "title": "Fast & Furious",
     "overview": "court film d'aventure",
+    "private": false,
     "release_date": "2024-01-17",
     "genres": "action",
-    "poster_path": "avengers.jpg",
-    "countries": null,
+    "poster_path": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR2jPpQB3fuTUXnJmO8sN9XaAXjjzjJJQbrQg&usqp=CAU",
+    "countries": "None",
     "vote_average": null,
     "vote_count": null,
     "images": [],
@@ -101,5 +104,21 @@
       }
     ],
     "user_id": "5470c806-8aaa-402b-a866-4229fe23a740"
+  },
+  {
+    "id": 8,
+    "title": "Mon film priveeee",
+    "overview": null,
+    "release_date": null,
+    "genres": "Com\u00e9die",
+    "poster_path": "https://i.ebayimg.com/images/g/dEUAAOSwECtkD628/s-l1200.webp",
+    "countries": null,
+    "vote_average": null,
+    "vote_count": null,
+    "images": [],
+    "comments": [],
+    "ratings": [],
+    "user_id": "ed0e3e93-8597-4dc1-aaa2-a12d41f6174c",
+    "private": true
   }
 ]

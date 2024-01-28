@@ -21,10 +21,12 @@ class MovieController:
         return RequestAPI.request_to_api('GET', url, success_message=f'Movie {movie_id} fetched successfully!', error_message=f'Failed to fetch movie {movie_id}!')
 
     @staticmethod
-    def add_movie(movie_data, route_url, method):
+    def add_movie(user_id, movie_data, route_url, method):
+        private = movie_data.form.get('private', '')
         title, overview, release_date, genres, poster_path, countries, vote_average, vote_count, images = (
         movie_data.form.get(field, '') for field in ['title', 'overview', 'release_date', 'genres', 'poster_path', 'countries', 'vote_average', 'vote_count', 'images'])
-        url = "{}/{}".format(MovieController.movie_url, route_url.rsplit('.', 1)[-1])
+        url = MovieController.movie_url + route_url
+        private = True if private == 'on' else False
         data = {
             key: value for key, value in {
                 "title": title,
@@ -35,9 +37,12 @@ class MovieController:
                 "countries": countries,
                 "vote_average": vote_average,
                 "vote_count": vote_count,
-                "images": images if isinstance(images, list) else []
+                "images": images if isinstance(images, list) else [],
+                "private": private,
+                "user_id": user_id
             }.items() if value
         }
+        print(f'Nos data: {data}')
         return RequestAPI.request_to_api(method, url, data, 'Movie added successfully!', 'Failed to add movie!')
 
     @staticmethod
@@ -59,7 +64,7 @@ class MovieController:
             }.items() if value
         }
         url = "{}/{}".format(MovieController.movie_url, route_url)
-        return RequestAPI.request_to_api(method, url, data, f'Movie updated successfully!', f'Failed to update movie!')
+        return RequestAPI.request_to_api("PUT", url, data, f'Movie updated successfully!', f'Failed to update movie!')
 
     @staticmethod
     def delete_movie(route_url, method):
@@ -69,7 +74,7 @@ class MovieController:
     @staticmethod
     def search_movie(query, fields, route_url, method):
         url = "{}/{}".format(MovieController.movie_url, route_url)
-        data = {"query": query, fields: fields}
+        data = {"query": query, "fields": fields}
         return RequestAPI.request_to_api(method, url, data, f'Search completed successfully!', f'Failed to complete search!')
 
     @staticmethod

@@ -79,12 +79,21 @@ class UserService:
         return user
 
     @staticmethod
-    def delete_user(user_id):
+    def deactivate_user(user_id):
         users = UserService.get_users()
         user = next((u for u in users if u['id'] == user_id), None)
         if user:
             # users.remove(user)
             user['is_active'] = False
+            UserService._save_users(users)
+        return user
+    
+    @staticmethod
+    def delete_user(user_id):
+        users = UserService.get_users()
+        user = next((u for u in users if u['id'] == user_id), None)
+        if user:
+            users.remove(user)
             UserService._save_users(users)
         return user
 

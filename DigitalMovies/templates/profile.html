@@ -80,18 +80,21 @@
                 <h6 class="heading-small text-muted mb-4">User information</h6>
                 <div class="pl-lg-4">
                   <div class="row">
+
                     <div class="col-lg-6">
                       <div class="form-group focused">
                         <label class="form-control-label" for="input-username">Username</label>
                         <input type="text" id="input-username" class="form-control form-control-alternative" placeholder="Username" value="{{data.json.data.user.pseudo}}" name="pseudo">
                       </div>
                     </div>
+
                     <div class="col-lg-6">
                       <div class="form-group">
                         <label class="form-control-label" for="input-email">Email address</label>
                         <input type="email" id="input-email" class="form-control form-control-alternative" placeholder="Email" value="{{data.json.data.user.email}}" name="email">
                       </div>
                     </div>
+
                   </div>
                   <div class="row">
                     <div class="col-lg-6">
@@ -100,13 +103,16 @@
                         <input type="text" id="input-first-name" class="form-control form-control-alternative" placeholder="First name" value="{{data.json.data.user.prenom}}" name="prenom">
                       </div>
                     </div>
+
                     <div class="col-lg-6">
                       <div class="form-group focused">
                         <label class="form-control-label" for="input-last-name">Last name</label>
                         <input type="text" id="input-last-name" class="form-control form-control-alternative" placeholder="Last name" value="{{data.json.data.user.nom}}" name="nom">
                       </div>
                     </div>
+
                   </div>
+
                   <div class="row">
                     <div class="col-lg-6">
                       <div class="form-group focused">
@@ -114,8 +120,20 @@
                         <input type="number" min="13" max="100" id="input-age" class="form-control form-control-alternative" placeholder="age" value="{{data.json.data.user.age}}" name="age">
                       </div>
                     </div>
+
+                    <div class="col-lg-6">
+                      <div class="form-group focused">
+                        <label class="form-control-label" for="input-profile-picture">Profile picture url</label>
+                    <input type="text" id="input-profile-picture" class="form-control form-control-alternative" placeholder="https://logo.png" value="{{data.json.data.user.profile_picture}}" name="profile_picture">
+                      </div>
+                    </div>
+                    
                   </div>
+
                 </div>
+
+               
+
                 <hr class="my-4">
                 
                 <button class="btn btn-icon btn-3 btn-primary" type="submit">

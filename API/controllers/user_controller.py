@@ -72,6 +72,16 @@ class UserController:
             return jsonify({"statusCode": 500, "error": f"Erreur interne. {str(e)}"})
 
     @staticmethod
+    def deactivate_user(user_id):
+        try:
+            user = UserService.deactivate_user(user_id)
+            if not user:
+                return jsonify({"statusCode": 200, "user": None})
+            return jsonify({"statusCode": 200, "user": user})
+        except Exception as e:
+            return jsonify({"statusCode": 500, "error": f"Erreur interne. {str(e)}"})
+    
+    @staticmethod
     def delete_user(user_id):
         try:
             user = UserService.delete_user(user_id)

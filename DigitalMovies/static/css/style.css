@@ -4,7 +4,6 @@
     padding: 0%;
     margin: 0%;
     box-sizing: border-box;
-
 }
 
 * {
@@ -335,9 +334,22 @@ nav .search_user .search .card .cont span {
     color: #fff;
     margin-left: 10px;
     text-decoration: none;
+    margin-right: 10px;
 }
 
 .mylink2 {
+    padding: 8px 12px;
+    font-size: 16px;
+    font-weight: 600;
+    background: #ff9b3d;
+    border-radius: 5px;
+    color: #fff;
+    margin-left: 10px;
+    text-decoration: none;
+    margin-right: 10px;
+}
+
+.mylink3 {
     padding: 8px 12px;
     font-size: 16px;
     font-weight: 600;
@@ -347,6 +359,8 @@ nav .search_user .search .card .cont span {
     margin-left: 10px;
     text-decoration: none;
 }
+
+
 
 
 section {
@@ -817,17 +831,17 @@ table {
 }
 
 .tableau {
-    /* border-collapse: collapse; */
-    /* width: 100%; */
     background-color: #080525;
-    padding: 20px;
     font-size: 15px;
-    /* text-align: center; */
-    /* margin: 20px; */
-    width: 50%;
-    /* aligne le tableau */
+    padding-top: 1rem;
+    padding-bottom: 2rem;
+    width: 80%;
+    text-align: -webkit-center;
     margin: auto;
     border-radius: 10px;
+}
+.tableau th {
+    font-family: monospace;
 }
 
 .tableau_ligne {
@@ -842,6 +856,10 @@ tr {
     /* border-bottom: 1px solid #ddd; */
     background-color: #080525;
 }
+/* pop up en dessous du tableau */
+.container-fluid.mt--7 {
+    padding-top: 2rem;
+}
 
 /* Style des cellules du tableau */
 td {
@@ -853,12 +871,6 @@ th {
 
     padding: 10px;
     text-align: left;
-}
-
-/* Style des liens "Delete" */
-.mylink2 {
-
-    margin-right: 10px;
 }
 
 /* ----- Bannire d'alerte ----- */
@@ -954,4 +966,47 @@ th {
 
 .genre-container span:last-child {
     margin-right: 0;
+}
+
+
+.badge-success {
+    color: #fff;
+    background-color: #28a745;
+}
+
+.badge-warning {
+    color: #212529;
+    background-color: #ffc107;
+}
+
+.badge-pill {
+    padding-right: 0.6em;
+    padding-left: 0.6em;
+    border-radius: 10rem;
+}
+.badge {
+    display: inline-block;
+    padding: 0.25em 0.4em;
+    font-size: 75%;
+    font-weight: 700;
+    line-height: 1;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: 0.25rem;
+}
+
+.monbouton {
+    background-color: red;
+    border-color: red;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    float: right;
+}
+.monbouton:hover {
+    color: #fff;
+    border-color: #ff5656;
+    background-color: #ff5656;
 }

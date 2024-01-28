@@ -1,0 +1,57 @@
+
+<br><br><br><br>
+<link rel="stylesheet" href="{{url_for('static', filename = 'css/profil.css')}}">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+<div class="main-content">
+
+
+<!-- Page content -->
+  <div class="container-fluid mt--7">
+    
+
+
+    <div class="col-xl-8 order-xl-1">
+      <div class="card bg-secondary shadow">
+        <div class="card-header bg-white border-0">
+          <div class="row align-items-center">
+            <div class="col-8">
+              <h3 class="mb-0">User Details</h3>
+            </div>
+          </div>
+        </div>
+        <div class="card-body" style="display: flex; align-items: center;">
+          <!-- Affiche le logo de profil uniquement s'il n'est pas null -->
+          {% if data_user and data_user.json.data.user.profile_picture %}
+            <div class="profile-picture-container">
+              <img src="{{ data_user.json.data.user.profile_picture }}" alt="Profile Picture" class="profile-picture">
+            </div>
+          {% endif %}
+          <div style="margin-left: 20px;">
+            <p><strong>Nom:</strong> {{ data_user.json.data.user.nom if data_user }}</p>
+            <p><strong>Prénom:</strong> {{ data_user.json.data.user.prenom if data_user }}</p>
+            <p><strong>Pseudo:</strong> {{ data_user.json.data.user.pseudo if data_user }}</p>
+            <p><strong>Email:</strong> {{ data_user.json.data.user.email if data_user }}</p>
+            <p><strong>Age:</strong> {{ data_user.json.data.user.age if data_user }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+
+    <style>
+      .profile-picture-container {
+  width: 100px; /* Largeur souhaitée de la photo de profil */
+  height: 100px; /* Hauteur souhaitée de la photo de profil */
+  overflow: hidden; /* Masquer toute partie de l'image qui dépasse de la boîte */
+  border-radius: 50%; /* Pour obtenir une forme de cercle */
+}
+
+.profile-picture {
+  width: 100%; /* Pour remplir la largeur de la boîte parente */
+  height: 100%; /* Pour remplir la hauteur de la boîte parente */
+  object-fit: cover; /* Redimensionne l'image pour qu'elle remplisse toute la boîte tout en conservant ses proportions */
+}
+    </style>
+    
+
+</div>

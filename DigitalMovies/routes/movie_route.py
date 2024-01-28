@@ -4,6 +4,7 @@
 # routes/movie_route.py
 from flask import Blueprint, request, render_template, make_response, g, url_for
 import requests
+import jwt
 from controllers.movie_controller import MovieController
 from .rule_route import require_token
 
@@ -21,28 +22,41 @@ def get_movie(movie_id):
 @require_token
 def add_movie():
     token = g.token
-    MovieController.add_movie(request, '/add', request.method)
+    decoded_token = jwt.decode(token, options={'verify_signature': False})
+    user_id = decoded_token.get('sub')
+    MovieController.add_movie(user_id, request, '/add', request.method)
     datas =  MovieController.get_movies()
     return render_template('my_movie.html', datas=datas, cookie=token)
 
 # ---------------------------------------- A TESTER ----------------------------------------
 @movie_blueprint.route('/<int:movie_id>/edit', methods=['POST'])
+@require_token
 def edit_movie(movie_id):
     token = g.token
-    data = MovieController.edit_movie(request.json, f'/{movie_id}/edit', request.method) # request.json ou request
-    return render_template('my_movie.html', data=data, cookie=token)
+    data = MovieController.edit_movie(request, f'/{movie_id}/edit', request.method) # request.json ou request
+    datas =  MovieController.get_movies()
+    return render_template('my_movie.html', data=data, datas=datas, cookie=token)
 
-@movie_blueprint.route('/<int:movie_id>/delete', methods=['DELETE'])
+@movie_blueprint.route('/<int:movie_id>/delete', methods=['POST'])
+@require_token
 def delete_movie(movie_id):
-    return MovieController.delete_movie(f'/{movie_id}/delete', request.method)
+    token = g.token
+    MovieController.delete_movie(f'/{movie_id}/delete', 'DELETE')
+    datas =  MovieController.get_movies()
+    return render_template('my_movie.html',datas=datas, cookie=token)
 
-@movie_blueprint.route('/search/<string:query>', methods=['POST'])
-def search_movie(query):
-    print("HELLO 1")
-    print(f'request json: {request}')
-    fields = request.json.get('fields', [])
-    print("HELLO 2")
-    return MovieController.search_movie(query, fields, f'/search/{query}', request.method)
+@movie_blueprint.route('/search', methods=['POST'])
+@require_token
+def search_movie():
+    token = g.token
+    query = request.form.get('query')
+    if not query:
+        query = '='
+    fields = request.form.getlist('filters[]')
+    if not fields:
+        fields = ['title', 'overview', 'release_date', 'genres', 'poster_path', 'countries', 'vote_average', 'vote_count']
+    data = MovieController.search_movie(query, fields, f'/search/{query}', request.method)
+    return render_template('my_movie.html', datas=data, cookie=token)
 
 @movie_blueprint.route('/<int:movie_id>/comments', methods=['POST'])
 def add_comment(movie_id):

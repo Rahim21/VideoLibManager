@@ -3,11 +3,12 @@
     "id": "5470c806-8aaa-402b-a866-4229fe23a740",
     "email": "user@email.com",
     "password": "pbkdf2:sha256:600000$vZFSKI7ZAWaxWpSd$47234e92c87597f7dc9d15b730e38fdcc02cdc8bbab3aadf19c73bc71ad0440c",
-    "nom": "None",
+    "nom": "pseudoooo",
     "prenom": "newPseudo",
     "pseudo": "newuser",
     "age": null,
     "role": "admin",
+    "profile_picture": "https://play-lh.googleusercontent.com/ahJtMe0vfOlAu1XJVQ6rcaGrQBgtrEZQefHy7SXB7jpijKhu1Kkox90XDuH8RmcBOXNn",
     "is_active": false
   },
   {
@@ -19,6 +20,7 @@
     "pseudo": "pseudo",
     "age": "22",
     "role": "admin",
+    "profile_picture": "https://www.univ-reims.fr/icmr/media-images/15568/logo-urca.jpg",
     "is_active": false
   },
   {
@@ -30,17 +32,7 @@
     "pseudo": "Samiiiii",
     "age": "20",
     "role": "user",
-    "is_active": true
-  },
-  {
-    "id": "1b4282fd-d347-4d9e-a0df-62b58b71cfec",
-    "email": "email2@email.com",
-    "password": "pbkdf2:sha256:600000$ZkJAyFS0sUevIKtN$a82b6b5032f7de39b7864f4abb44c4ef028bf579e851badcb128ac0a34c4a2d8",
-    "nom": null,
-    "prenom": null,
-    "pseudo": "user2",
-    "age": null,
-    "role": "user",
+    "profile_picture": null,
     "is_active": true
   }
 ]

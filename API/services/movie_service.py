@@ -127,6 +127,7 @@ class MovieService:
         file_path = "database/movies.json"
         with open(file_path, "w") as file:
             json.dump(movies, file, indent=2)
+        MovieService.build_index()
 
     @staticmethod
     def _load_movies():

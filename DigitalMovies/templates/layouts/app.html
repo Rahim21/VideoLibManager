@@ -44,7 +44,14 @@
                     <!-- Utilisateur connecté -->
                     <div style="color: #fff; margin-left: 30px;">{{ session['username'] }}</div>
                     <a href="{{ url_for('page.show_profile') }}">
-                    <img src="{{url_for('static', filename = 'images/user.png')}}" alt=""></a>
+                    {% if 'profile_picture' in session %}
+                        <img src="{{ session['profile_picture'] }}">
+                    {% else %}
+                        <!-- Utilisation du logo par défaut si la session ne contient pas de logo de profil -->
+                        <img src="{{url_for('static', filename = 'images/user.png')}}">
+                    {% endif %}
+
+                    </a>
                     <a href="/users/logout"><i class="bi bi-box-arrow-right"></i> </a>
                 {% else %}
                     <!-- Utilisateur non connecté -->

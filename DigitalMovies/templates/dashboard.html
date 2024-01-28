@@ -24,6 +24,7 @@
                 <th>  Pseudo</th>
                 <th>  Email</th>
                 <th>  is Active </th>
+                <th>  Role </th>
               
             </tr> 
             {% for user in data.json.data.users %}
@@ -57,20 +58,77 @@
                         }
                     </style>
                 </td>
-                <td><a class="mylink" href="">Show</a></td>
+                <td> 
+                    {% if user.role == "admin" %}
+                        <span class="badge badge-success">Admin</span>
+                    {% else %}
+                        <span class="badge badge-warning">User</span>
+                    {% endif %}
+                </td>
+
                 <td>
-                <form method="POST" action="{{ url_for('user.delete_user', user_id=user.id) }}">
+                    <form method="POST" action="{{ url_for('user.get_user', user_id=user.id) }}">
+                    <input type="hidden" name="_method" value="GET">
+                    <!-- <button type="submit" class="mylink">Show</button> -->
+                    <button type="button" class="show-user-button mylink" data-user-id="{{ user.id }}">Show</button>
+                </form>
+            </td>
+                
+                <td>
+                <form method="POST" action="{{ url_for('user.deactivate_user', user_id=user.id) }}">
                     <input type="hidden" name="_method" value="DELETE">
-                    <button type="submit" class="mylink2">Delete</button>
-                </form></td> 
+                    <button type="submit" class="mylink2">Deactivate</button>
+                </form>
+                </td>
+
+                <td>
+                    <form method="POST" action="{{ url_for('user.delete_user', user_id=user.id) }}">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <button type="submit" class="mylink3">Delete</button>
+                    </form>
+                </td>
             </tr> 
            </div>
              {% endfor %}
         </table>
     </div>
     <!-- </section> -->
-        
-        
+    
+    <div id="user-details-popup" style="display: none;">
+        {% include 'show_user.html' %}
+    </div>
+
+    <script>
+        // Sélectionnez tous les boutons "Show"
+        var showButtons = document.querySelectorAll('.show-user-button');
+        var userDetailsPopup = document.getElementById('user-details-popup');
+        var isDetailsPopupVisible = false; // Variable pour suivre l'état de la div des détails de l'utilisateur
+      
+        // Ajoutez un écouteur d'événements à chaque bouton "Show"
+        showButtons.forEach(function(button) {
+          button.addEventListener('click', function() {
+            var userId = this.getAttribute('data-user-id'); // Récupérez l'ID de l'utilisateur
+      
+            // Si la div des détails de l'utilisateur est déjà affichée, masquez-la
+            if (isDetailsPopupVisible) {
+              userDetailsPopup.style.display = 'none';
+              isDetailsPopupVisible = false;
+            } else {
+              // Faites une requête fetch pour obtenir le contenu de show_user_page
+              fetch('/show_user_page/' + userId)
+                .then(response => response.text())
+                .then(html => {
+                  // Insérez le contenu HTML dans la div de détails de l'utilisateur
+                  userDetailsPopup.innerHTML = html;
+                  // Affichez la div de détails de l'utilisateur
+                  userDetailsPopup.style.display = 'block';
+                  isDetailsPopupVisible = true;
+                });
+            }
+          });
+        });
+      </script>
+      
 
    
 {% endblock %}

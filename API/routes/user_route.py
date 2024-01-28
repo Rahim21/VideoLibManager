@@ -38,6 +38,11 @@ def get_user(user_id):
 def edit_user(user_id):
     return UserController.edit_user(user_id, request.json)
 
+@user_blueprint.route('/<string:user_id>/deactivate', methods=['DELETE'])
+@jwt_required()
+def deactivate_user(user_id):
+    return UserController.deactivate_user(user_id)
+
 @user_blueprint.route('/<string:user_id>/delete', methods=['DELETE'])
 @jwt_required()
 def delete_user(user_id):
