@@ -51,8 +51,8 @@ def add_movie():
 @require_token
 def my_movie():
     token = g.token
-    data =  MovieController.get_movies()
-    return render_template('my_movie.html', cookie=token , datas=data)
+    datas =  MovieController.get_movies()
+    return render_template('my_movie.html', cookie=token , datas=datas)
 
 
 @page_blueprint.route('/movie_detail/<int:movie_id>', methods=['GET'])
@@ -99,5 +99,24 @@ def show_dashboard():
 @require_token
 def show_edit(movie_id):
     token = g.token
+    decoded_token = jwt.decode(token, options={'verify_signature': False})
+    user_id = decoded_token.get('sub')
+
     data = MovieController.get_movie(movie_id)
-    return render_template('update_movie.html', cookie=token, data=data)
+    reponse = data.json
+    movie = reponse['data']['movie']
+    # Note utilisateur
+    user_rating = None
+    if movie.get('ratings'):
+        for rating in movie['ratings']:
+            if rating['user_id'] == user_id:
+                user_rating = rating['rating']
+                break
+
+    # Moynne de notation du film
+    if movie.get('ratings'):
+        total_ratings = sum(int(rating['rating']) for rating in movie['ratings'])
+        average_rating = total_ratings / len(movie['ratings'])
+    else:
+        average_rating = None
+    return render_template('update_movie.html', cookie=token, data=data, average_rating=average_rating, user_rating=user_rating)

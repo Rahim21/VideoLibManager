@@ -2,7 +2,7 @@
 # Auteurs: HAYAT Rahim et DRIOUCHE Sami
 # -----------------------------------------------------------------------------
 # routes/movie_route.py
-from flask import Blueprint, request, render_template, make_response, g
+from flask import Blueprint, request, render_template, make_response, g, url_for
 import requests
 from controllers.movie_controller import MovieController
 from .rule_route import require_token
@@ -21,8 +21,9 @@ def get_movie(movie_id):
 @require_token
 def add_movie():
     token = g.token
-    data =  MovieController.add_movie(request, '/add', request.method)
-    return render_template('my_movie.html', data=data, cookie=token)
+    MovieController.add_movie(request, '/add', request.method)
+    datas =  MovieController.get_movies()
+    return render_template('my_movie.html', datas=datas, cookie=token)
 
 # ---------------------------------------- A TESTER ----------------------------------------
 @movie_blueprint.route('/<int:movie_id>/edit', methods=['POST'])
@@ -35,9 +36,13 @@ def edit_movie(movie_id):
 def delete_movie(movie_id):
     return MovieController.delete_movie(f'/{movie_id}/delete', request.method)
 
-@movie_blueprint.route('/search/<string:query>', methods=['GET'])
+@movie_blueprint.route('/search/<string:query>', methods=['POST'])
 def search_movie(query):
-    return MovieController.search_movie(query, f'/search/{query}', request.method)
+    print("HELLO 1")
+    print(f'request json: {request}')
+    fields = request.json.get('fields', [])
+    print("HELLO 2")
+    return MovieController.search_movie(query, fields, f'/search/{query}', request.method)
 
 @movie_blueprint.route('/<int:movie_id>/comments', methods=['POST'])
 def add_comment(movie_id):
@@ -45,7 +50,7 @@ def add_comment(movie_id):
 
 @movie_blueprint.route('/<int:movie_id>/rating', methods=['POST'])
 def add_rating(movie_id):
-    return MovieController.add_rating(request.json, f'/{movie_id}/rating', request.method) # request.json ou request
+    return MovieController.add_rating(request.json, f'/{movie_id}/rating', request.method)
 
 @movie_blueprint.route('/<int:movie_id>/images', methods=['GET'])
 def get_images(movie_id):

@@ -1,7 +1,30 @@
 {% extends 'layouts/app.html' %}
 
 {% block content %}
-<h1 id="titre_movie">All movies</h1>
+<h1 id="titre_movie">All Videos in My VideoTech</h1>
+
+<form action="{{ url_for('movie.search_movie', query='hello') }}" method="POST">
+  <!-- Barre de recherche -->
+  <div class="search-bar">
+    <input type="text" name="query" placeholder="Search...">
+  </div>
+
+  <!-- Cases à cocher pour filtrer -->
+  <div class="filter-options">
+    <label><input type="checkbox" name="filter" value="title"><span>Title</span></label>
+    <label><input type="checkbox" name="filter" value="overview"><span>Overview</span></label>
+    <label><input type="checkbox" name="filter" value="release_date"><span>Release Date</span></label>
+    <label><input type="checkbox" name="filter" value="genres"><span>Genres</span></label>
+    <label><input type="checkbox" name="filter" value="poster_path"><span>Poster Path</span></label>
+    <label><input type="checkbox" name="filter" value="countries"><span>Countries</span></label>
+    <label><input type="checkbox" name="filter" value="vote_average"><span>Vote Average</span></label>
+    <label><input type="checkbox" name="filter" value="vote_count"><span>Vote Count</span></label>
+  </div>
+
+  <input type="submit" value="Search" hidden>
+</form>
+
+
 
 
 <!-- Card pour les films -->
@@ -11,7 +34,7 @@
     <i class="bi bi-chevron-right"></i>
     <div class="cards">
     
-      {% for movie in datas.json.data.movies %}
+    {% for movie in datas.json.data.movies %}
     <div class="card" id="card" data-id="{{ movie.id }}">
       <img src="{{movie.poster_path}}" alt="" class="poster">
             <div class="rest_card">

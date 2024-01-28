@@ -23,8 +23,6 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-
-
 }
 
 header {
@@ -32,33 +30,25 @@ header {
     width: 100%;
     height: 100%;
     overflow-x: hidden;
-
-
-
 }
 
 header::before {
-
     content: '';
     position: absolute;
     width: 100%;
     height: 100%;
     /* background: url('/static/images/Cover.svg') no-repeat center center/cover; */
-
     opacity: .9;
-
     z-index: -1;
 }
 
 header::after {
-
     content: '';
     position: absolute;
     width: 100%;
-    height: 100%;
+    /* height: 100%; */
     background: linear-gradient(180deg, transparent, #000);
     z-index: -1;
-
 }
 
 /* video de fond */
@@ -149,14 +139,15 @@ nav .search_user {
 }
 
 nav .search_user input {
-    padding: 10px 95px;
+    padding-top: 10px;
+    padding-right: 90px;
+    padding-left: 10px;
+    padding-bottom: 10px;
     border-radius: 20px;
     border: none;
     outline: none;
     background: rgb(255, 255, 255, .3);
     color: #fff;
-    margin-right: 30px;
-
 }
 
 nav .search_user input::placeholder {
@@ -328,9 +319,12 @@ nav .search_user .search .card .cont span {
     margin-top: 20px;
     display: flex;
     align-items: center;
-
 }
-
+.btns:hover {
+    text-decoration: underline;
+    text-decoration-color: #9289f6;
+    text-decoration-thickness: 4px;
+}
 .mylink,
 .content .btns a {
     padding: 8px 12px;
@@ -376,6 +370,10 @@ section .cards {
     align-items: center;
     overflow-x: auto;
     scroll-behavior: smooth;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    flex-direction: row;
 }
 
 section .cards::-webkit-scrollbar {
@@ -463,7 +461,7 @@ section .cards .card .rest_card .cont {
 
 .sub h3 {
     font-size: 12px;
-    color: #20df06;
+    color: #fff601;
     display: flex;
     align-items: center;
 }
@@ -492,7 +490,7 @@ section .bi-chevron-left,
     left: 3%;
     width: 25px;
     height: 25px;
-    background: rgb(255, 255, 255, .3);
+    background: rgb(146 136 250 / 60%);
     color: #fff;
     display: flex;
     align-items: center;
@@ -714,7 +712,7 @@ header section #inscription-form {
 
 .block {
     padding: 10px;
-    padding-top: 5%;
+    padding-top: 7rem;
 }
 
 #titre_film {
@@ -743,10 +741,10 @@ header section #inscription-form {
 }
 
 .details-page .img {
-    position: absolute;
+    position: relative;
     width: 1200px;
     height: 480px;
-    top: 15%;
+    top: 0rem;
     left: 15%;
     /* object-fit: cover; */
     border-bottom: 1px solid var(--primaryColor);
@@ -762,8 +760,8 @@ header section #inscription-form {
     align-items: flex-start;
     gap: 8px;
     padding: 40px;
-    position: absolute;
-    top: 70%;
+    position: relative;
+    top: -5rem;
     left: 20%;
     background-color: #20283ecc;
     border-radius: 24px;
@@ -795,8 +793,8 @@ header section #inscription-form {
     color: #fff;
     font-size: 25px;
     font-weight: bold;
-    margin-bottom: 10px;
-    margin-top: 35%;
+    margin-bottom: 0rem;
+    margin-top: 0rem;
     text-align: center;
     top: 100%;
 }
@@ -861,4 +859,99 @@ th {
 .mylink2 {
 
     margin-right: 10px;
+}
+
+/* ----- Bannire d'alerte ----- */
+.alert {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 10px;
+    border-radius: 5px;
+    color: white;
+    display: none;
+    background-color: rgba(0, 0, 0, 0.7); /* Couleur de fond transparente */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Ombre légère */
+    font-weight: bold;
+}
+.alert-success {
+    background-color: rgba(104, 255, 104, 0.27); /* Vert transparent */
+}
+.alert-error {
+    background-color: rgba(255, 29, 29, 0.248); /* Rouge transparent */
+}
+.icon {
+    margin-right: 10px;
+}
+
+/* Add movie button */
+
+.custom-button {
+    background-color: #9289f6;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.custom-button:hover {
+    background-color: #7d76d1;
+}
+
+/* my movie, recherche */
+
+.search-bar {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.search-bar input[type="text"] {
+    padding: 10px;
+    width: 50%;
+    border-radius: 5px;
+    border: 1px solid #9289f6;
+}
+
+.filter-options {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.filter-options label span {
+    display: inline-block;
+    padding: 5px 10px;
+    color: white;
+    border: 1px solid #9289f6;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.filter-options input[type="checkbox"] {
+    display: none;
+}
+
+.filter-options input[type="checkbox"]:checked + span {
+    background-color: #9289f6;
+}
+
+/* ----- Movie detail Genre ----- */
+.genre-container {
+    display: flex;
+    flex-wrap: wrap;
+    padding-top: 0.75rem;
+}
+
+.genre-container span {
+    display: inline-block;
+    padding: 5px 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #9289f6;
+    border-radius: 20px;
+    color: #9289f6;
+    cursor: pointer;
+}
+
+.genre-container span:last-child {
+    margin-right: 0;
 }

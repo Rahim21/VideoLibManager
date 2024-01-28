@@ -67,9 +67,9 @@ class MovieController:
         return RequestAPI.request_to_api(method, url, None, f'Movie deleted successfully!', f'Failed to delete movie!')
 
     @staticmethod
-    def search_movie(query, route_url, method):
+    def search_movie(query, fields, route_url, method):
         url = "{}/{}".format(MovieController.movie_url, route_url)
-        data = {"query": query}
+        data = {"query": query, fields: fields}
         return RequestAPI.request_to_api(method, url, data, f'Search completed successfully!', f'Failed to complete search!')
 
     @staticmethod

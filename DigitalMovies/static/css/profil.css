@@ -177,7 +177,7 @@ h6,
     font-weight: 600;
     line-height: 1.5;
     margin-bottom: .5rem;
-    color: #32325d;
+    /* color: #32325d; */
 }
 
 h1,
@@ -334,6 +334,7 @@ a>code {
     .col-xl-8 {
         max-width: 66.66667%;
         flex: 0 0 66.66667%;
+        text-align: left;
     }
 
     .order-xl-1 {
@@ -1261,6 +1262,8 @@ a.text-white:focus {
 
 .main-content {
     position: relative;
+    /* ajouté */
+    text-align: -webkit-center;
 }
 
 .main-content .navbar-top {

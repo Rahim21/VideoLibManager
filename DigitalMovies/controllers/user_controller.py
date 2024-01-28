@@ -57,7 +57,7 @@ class UserController:
     @staticmethod
     def get_user(user_id, route_url, method):
         url = "{}/{}".format(UserController.user_url, user_id)
-        return RequestAPI.request_to_api(method, url, success_message=f'User {user_id} fetched successfully!', error_message=f'Failed to fetch user {user_id}!')
+        return RequestAPI.request_to_api(method, url, success_message=f'User fetched successfully!', error_message=f'Failed to fetch user!')
 
     @staticmethod 
     def edit_user(user_id, user_data, route_url, method):
@@ -71,13 +71,13 @@ class UserController:
                 "password": password,
                 "nom": nom,
                 "prenom": prenom,
-                "pseudo": "pseudo",
+                "pseudo": pseudo,
                 "age": age,
                 "is_active": is_active
             }.items() if value
         }
         url = "{}/{}".format(UserController.user_url, route_url.rsplit('.', 1)[-1])
-        return RequestAPI.request_to_api(method, url, data, f'User {user_id} updated successfully!', f'Failed to update user {user_id}!')
+        return RequestAPI.request_to_api(method, url, data, f'User {pseudo} updated successfully!', f'Failed to update user {pseudo}!')
 
     @staticmethod
     def delete_user(route_url, method):

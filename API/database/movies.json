@@ -11,7 +11,16 @@
     "vote_count": null,
     "images": [],
     "comments": [],
-    "ratings": [],
+    "ratings": [
+      {
+        "user_id": "1b4282fd-d347-4d9e-a0df-62b58b71cfec",
+        "rating": "4"
+      },
+      {
+        "user_id": "5470c806-8aaa-402b-a866-4229fe23a740",
+        "rating": "4"
+      }
+    ],
     "user_id": "ed0e3e93-8597-4dc1-aaa2-a12d41f6174c"
   },
   {
@@ -26,7 +35,16 @@
     "vote_count": null,
     "images": [],
     "comments": [],
-    "ratings": [],
+    "ratings": [
+      {
+        "user_id": "1b4282fd-d347-4d9e-a0df-62b58b71cfec",
+        "rating": "4"
+      },
+      {
+        "user_id": "5470c806-8aaa-402b-a866-4229fe23a740",
+        "rating": "5"
+      }
+    ],
     "user_id": "ed0e3e93-8597-4dc1-aaa2-a12d41f6174c"
   },
   {
@@ -41,7 +59,12 @@
     "vote_count": null,
     "images": [],
     "comments": [],
-    "ratings": [],
+    "ratings": [
+      {
+        "user_id": "1b4282fd-d347-4d9e-a0df-62b58b71cfec",
+        "rating": "4"
+      }
+    ],
     "user_id": "ed0e3e93-8597-4dc1-aaa2-a12d41f6174c"
   },
   {
@@ -71,7 +94,12 @@
     "vote_count": null,
     "images": [],
     "comments": [],
-    "ratings": [],
+    "ratings": [
+      {
+        "user_id": "5470c806-8aaa-402b-a866-4229fe23a740",
+        "rating": "5"
+      }
+    ],
     "user_id": "5470c806-8aaa-402b-a866-4229fe23a740"
   }
 ]

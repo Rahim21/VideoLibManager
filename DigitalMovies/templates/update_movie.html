@@ -18,6 +18,94 @@
             <div class="col-8">
           <h3 class="mb-0">{{ data.json.data.movie.title if data }}</h3>
             </div>
+
+
+<!-- DEBUT ETOILE -->
+<div class="col-4 text-right">
+  <div class="rating" data-movie-id="{{ data.json.data.movie.id if data }}">
+      {% for star_value in range(5, 0, -1) %}
+          <span class="star {% if user_rating is defined and user_rating|int >= star_value %}yellow{% endif %}" data-value="{{ star_value }}" onclick="submitRating(this)">☆</span>
+      {% endfor %}
+      <span class="note">Modifier la note : </span>
+  </div>
+  <!-- texte en gras dans le style -->
+  <div class="note">Note moyenne :
+      <bold style="color:#9289f6; font: caption; font-size: 1.5rem;">
+          {% if average_rating %}
+              {{ average_rating }}/5
+          {% else %}
+              Aucune évaluation
+          {% endif %}
+      </bold>
+  </div>
+  <!-- FIN note -->
+</div>
+
+<script>
+  function submitRating(element) {
+      var ratingValue = element.getAttribute("data-value");
+      var movieId = element.closest('.rating').getAttribute("data-movie-id");
+
+      if (movieId) {
+          var url = "{{ url_for('movie.add_rating', movie_id=0) }}".replace("0", movieId);
+
+          fetch(url, {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({ rating: ratingValue }),
+          })
+          .then(response => {
+              if (response.ok) {
+                  console.log("Note soumise avec succès!");
+                  // Mettre à jour l'interface utilisateur ou effectuer d'autres actions si nécessaire
+              } else {
+                  console.error("Erreur lors de la soumission de la note");
+              }
+          })
+          .catch(error => {
+              console.error("Erreur lors de la soumission de la note:", error);
+          });
+      } else {
+          console.error("Impossible de récupérer l'ID du film.");
+      }
+  }
+</script>
+
+<style>
+  .star {
+      cursor: pointer;
+      transition: color 0.2s;
+  }
+
+  .yellow {
+      color: gold;
+  }
+
+  .star:hover,
+  .star:hover ~ .star {
+      color: gold;
+  }
+
+  .rating {
+      display: flex;
+      justify-content: flex-end;
+      flex-direction: row-reverse;
+  }
+
+  span.note {
+      padding-right: 1rem;
+  }
+
+  .note {
+      text-align: -webkit-left;
+  }
+</style>
+<!-- FIN ETOILE -->
+
+
+
             
           </div>
         </div>

@@ -26,11 +26,12 @@ def login():
         # resp.headers['Location'] = '/'
         resp.status_code = 302
         session['data'] = response_data
+        session['username'] = response_data.get('data').get('pseudo')
         # Redirect to the index page
         return resp
     else:
         # If login failed, render the same login page with the response data
-        return render_template('login.html', data=response_data)
+        return render_template('login.html', data=response)
 
 @user_blueprint.route('/logout', methods=['GET'])
 def logout():
@@ -48,7 +49,8 @@ def get_user(user_id):
 @require_token
 def edit_user(user_id):
     user_data = UserController.edit_user(user_id, request, f'{user_id}/edit', "PUT")
-    #retourne la page de l'utilisateur modifié
+    reponse = user_data.json
+    session['username'] = reponse['data']['user']['pseudo']
     return render_template('profile.html', data=user_data , cookie=g.token) 
 
 @user_blueprint.route('/<string:user_id>/delete', methods=['POST'])

@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="{{url_for('static', filename = 'css/style.css')}}">
     <link rel="shortcut icon" type="image/x-ico" href="{{url_for('static', filename = 'images/favicon.png')}}"/>
     
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
 </head>
 <body>
     <header>
@@ -16,19 +18,22 @@
         <nav>
             <!-- navbar -->
             <div class="logo_ul">
-                <img src="{{url_for('static', filename = 'images/logo.png')}}" alt="">
+                <a href="{{ url_for('page.index') }}">
+                    <img src="{{url_for('static', filename = 'images/logo.png')}}" alt="">
+                </a>
                 <ul>
                     <li>
                         <a href="{{ url_for('page.index') }}">Home</a>
                     </li>
+                    <li>
+                        <a href="{{ url_for('page.my_movie') }}" id="movies">Go to My VideoTech</a>
+                    </li>
                     {% if cookie %}
                     <li>
-                        <a href="{{ url_for('page.add_movie') }}" id="add_new_movie">Add Movie</a>
+                        <a href="{{ url_for('page.add_movie') }}" id="add_new_movie" class="custom-button">Add Movie</a>
                     </li>
                     {% endif %}
-                    <li>
-                        <a href="{{ url_for('page.my_movie') }}" id="movies">My Movies</a>
-                    </li>
+                    
                 </ul>
             </div>
             <!-- barre de recherche -->
@@ -37,6 +42,7 @@
 
                 {% if cookie %}
                     <!-- Utilisateur connecté -->
+                    <div style="color: #fff; margin-left: 30px;">{{ session['username'] }}</div>
                     <a href="{{ url_for('page.show_profile') }}">
                     <img src="{{url_for('static', filename = 'images/user.png')}}" alt=""></a>
                     <a href="/users/logout"><i class="bi bi-box-arrow-right"></i> </a>
@@ -57,10 +63,54 @@
             
             {% block content %}{% endblock %}
         </div>
+
+        <!-- Banniere d'alerte -->
+        <div id="alert" class="alert"></div>
        
-</header> 
+</header>
+<script>
+// ----- Bannière d'alerte -----
+// Récupérez les données passées depuis Flask
+ var typeMsg = "{{ datas.json.type_msg if datas }}";
+ typeMsg = "{{ data.json.type_msg if data }}";
+ 
+ var message = "{{ datas.json.message if datas }}";
+ message = "{{ data.json.message if data }}";
 
+ // Récupérer depuis session['data'] si le message est dans la session
+ if (session['data']) {
+     typeMsg = session['data'].type_msg;
+     message = session['data'].message;
+    console.log("Message to display", typeMsg, message);
 
-<script src= "{{url_for('static', filename = 'js/app.js')}}"></script></head>
+     // Supprimez le message de la session
+     delete session['data'];
+    } else {
+     // Affichez l'alerte
+     console.log("Nothing to display");
+    }
+
+ // Sélectionnez l'élément d'alerte
+ var alertElement = document.getElementById('alert');
+
+ // Ajoutez la classe de couleur appropriée en fonction du type de message
+ if (typeMsg === 'success') {
+     alertElement.classList.add('alert-success');
+ } else if (typeMsg === 'error') {
+     alertElement.classList.add('alert-error');
+ }
+
+ // Mettez le message dans l'élément d'alerte
+ alertElement.innerText = message;
+
+ // Affichez l'alerte
+ alertElement.style.display = 'block';
+
+ // Cacher l'alerte après 3 secondes
+ setTimeout(function() {
+     alertElement.style.display = 'none';
+ }, 3000);
+</script>
+<script src= "{{url_for('static', filename = 'js/app.js')}}"></script>
 </body>
 </html>

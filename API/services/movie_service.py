@@ -101,12 +101,16 @@ class MovieService:
             # Find the existing rating by the user
             rating_index = next((i for i, rating in enumerate(movies[movie_index]['ratings']) if rating['user_id'] == user_id), None)
             rating_data['user_id'] = user_id
+            new_rating = {
+                'user_id': user_id,
+                'rating': rating_data['rating']['rating']
+            }
             if rating_index is not None:
                 # If a rating by the user exists, replace it
-                movies[movie_index]['ratings'][rating_index] = rating_data
+                movies[movie_index]['ratings'][rating_index] = new_rating
             else:
                 # If no rating by the user exists, add a new one
-                movies[movie_index]['ratings'].append(rating_data)
+                movies[movie_index]['ratings'].append(new_rating)
             MovieService._save_movies(movies)  # Save all movies
             return movies[movie_index]
         return None

@@ -46,19 +46,21 @@
             </div>
             <div class="details "></div>
             <br>
-                <p>Genre :</p>
-                
+            
+            <p>Genre :</p>
+            <div class="genre-container">
                 {% for genre in movie.genres %}
-                <p>{{ genre.name }}<p>
-                    
+                    <span>{{ genre.name }}</span>
                 {% endfor %}
-                <br>
-                <!-- fait une petite barre hr -->
-                <hr>
-                
-                <br>
-                <div class="btns">
-                    <iframe width="560" height="315" src="https://www.youtube.com/embed/{{data_video}}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+
+            <br>
+            <!-- fait une petite barre hr -->
+            <hr>
+            
+            <br>
+            <div class="btns">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/{{data_video}}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     </div>
                 <!-- Fenêtre Modale Bootstrap -->
     <!-- <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
